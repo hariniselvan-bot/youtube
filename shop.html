@@ -509,22 +509,25 @@ document.getElementById("mobileDrop").classList.toggle("active");
 
 <div class="stackly-cta-content">
 
-<h1>DASHBOARD OVERVIEW</h1>
+<h1>SHOP MOVIES COLLECTION</h1>
 
 <p>
-Monitor your streaming platform performance in real time. 
-Track movie views, user activity, and platform growth with powerful analytics tools.
+Explore and purchase your favorite movies instantly. 
+Discover new releases, trending titles, and exclusive collections in one place.
+Enjoy high-quality streaming and build your personal movie library.
 </p>
 
 <div class="stackly-cta-buttons">
 
-<a href="404.html" class="stackly-watch-btn">
-<i class="fa-solid fa-chart-line"></i> View Analytics
+<a href="movies.html" class="stackly-watch-btn">
+<i class="fa-solid fa-film"></i> Browse Movies
 </a>
 
-<a href="404.html" class="stackly-buy-btn">
-<i class="fa-solid fa-film"></i> Manage Movies
+<a href="shop.html" class="stackly-buy-btn">
+<i class="fa-solid fa-cart-shopping"></i> Buy Movies
 </a>
+
+</div>
 
 </div>
 
@@ -617,6 +620,7 @@ background:#111;
 .stackly-buy-btn:hover{
 background:#5d1935;
 }
+
 </style>
 
 
@@ -1044,6 +1048,111 @@ font-size:20px;
 }
 
 }
+
+/* =========================
+GLOBAL MOBILE FIX
+========================= */
+
+@media(max-width:768px){
+
+body{
+padding:15px;
+}
+
+/* HEADER */
+
+header{
+padding:15px 20px;
+}
+
+/* HERO CTA */
+
+.stackly-movie-cta{
+height:auto;
+padding:80px 20px;
+}
+
+.stackly-cta-content h1{
+font-size:34px;
+letter-spacing:1px;
+}
+
+.stackly-cta-content p{
+font-size:15px;
+line-height:1.6;
+}
+
+/* BUTTON STACK */
+
+.stackly-cta-buttons{
+flex-direction:column;
+gap:15px;
+}
+
+.stackly-watch-btn,
+.stackly-buy-btn{
+width:100%;
+text-align:center;
+}
+
+/* SECTION HEADERS */
+
+.topHeader{
+flex-direction:column;
+align-items:flex-start;
+gap:6px;
+}
+
+.topHeader h2{
+font-size:20px;
+}
+
+/* MOVIE SLIDER */
+
+.movieSlider{
+gap:14px;
+padding-bottom:15px;
+}
+
+/* MOVIE CARDS */
+
+.movieCard{
+min-width:150px;
+height:230px;
+}
+
+/* FOOTER */
+
+.stackly-footer{
+padding:50px 20px;
+}
+
+.stackly-footer-container{
+grid-template-columns:1fr;
+gap:30px;
+}
+
+}/* =========================
+SCROLL ANIMATION
+========================= */
+
+.reveal{
+opacity:0;
+transform:translateY(60px);
+transition:all 0.8s ease;
+}
+
+.reveal.active{
+opacity:1;
+transform:translateY(0);
+}.movieCard{
+transition:transform .4s ease, box-shadow .4s ease;
+}
+
+.movieCard:hover{
+transform:scale(1.07);
+box-shadow:0 20px 40px rgba(0,0,0,0.6);
+}
 </style>
 
 <footer class="stackly-footer">
@@ -1245,3 +1354,26 @@ grid-template-columns:1fr;
 
 }
 </style>
+<script>
+
+function revealSections(){
+
+const reveals=document.querySelectorAll(".reveal");
+
+reveals.forEach(el=>{
+
+const windowHeight=window.innerHeight;
+const elementTop=el.getBoundingClientRect().top;
+
+if(elementTop < windowHeight-100){
+el.classList.add("active");
+}
+
+});
+
+}
+
+window.addEventListener("scroll",revealSections);
+revealSections();
+
+</script>
