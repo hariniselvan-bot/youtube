@@ -135,14 +135,16 @@ cursor:pointer;
 position:absolute;
 top:100%;
 left:0;
-background:#111;
+background: var(--bg);
 padding:18px;
-border-radius:10px;
+border-radius:12px;
 display:none;
 flex-direction:column;
 gap:12px;
-min-width:160px;
-box-shadow:0 10px 40px rgba(0,0,0,0.7);
+min-width:170px;
+box-shadow:0 15px 50px rgba(0,0,0,0.5);
+border:1px solid rgba(255,255,255,0.08);
+backdrop-filter:none;
 }
 
 /* DESKTOP HOVER */
@@ -203,7 +205,7 @@ top:0;
 left:-100%;
 width:100%;
 height:100vh;
-background:linear-gradient(160deg,#0b0b0b,#1a0033,#2a001d);
+background:var(--bg-secondary);
 display:flex;
 flex-direction:column;
 align-items:center;
@@ -226,7 +228,7 @@ margin:20px 0;
 }
 
 .mobile-menu a{
-color:white;
+color:var(--text-primary);
 font-size:26px;
 text-decoration:none;
 display:flex;
@@ -243,7 +245,7 @@ margin-top:10px;
 .mobile-dropdown a{
 display:block;
 font-size:18px;
-color:#ddd;
+color:var(--text-secondary);
 margin:8px 0;
 }
 
@@ -256,7 +258,7 @@ position:absolute;
 top:30px;
 right:35px;
 font-size:30px;
-color:white;
+color:var(--text-primary);
 cursor:pointer;
 }
 
