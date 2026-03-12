@@ -1,0 +1,2978 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Stackly Header</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+:root{
+  --bg:#0d0d0d;
+  --text:#e4e4e4;
+  --muted:#d1d5db;
+  --header-bg: rgba(0,0,0,0.65);
+  --accent1:#7c3aed;
+  --accent2:#ff3e7f;
+  --card-bg: rgba(95, 97, 109, 0.05);
+  --overlay: rgba(0,0,0,0.65);
+  --footer-bg:#070b14;
+  --logo-filter: drop-shadow(0 0 3px #7c3aed) drop-shadow(0 0 6px #ff3e7f);
+  --logo-filter-hover: drop-shadow(0 0 6px #7c3aed) drop-shadow(0 0 12px #ff3e7f);
+  --btn-bg: rgba(0,0,0,0.6);
+  --btn-accent: #c52294;
+}
+
+/* smooth theme transition */
+html, body {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+[data-theme="light"]{
+  --bg:#f8fafc;
+  --text:#0b1220;
+  --muted:#6b7280;
+  --header-bg: rgba(255,255,255,0.85);
+  --card-bg: rgba(0,0,0,0.04);
+  --overlay: rgba(255,255,255,0.65);
+  --footer-bg:#f1f5f9;
+  --logo-filter: drop-shadow(0 0 3px #7c3aed) drop-shadow(0 0 6px #ff3e7f);
+  --logo-filter-hover: drop-shadow(0 0 6px #7c3aed) drop-shadow(0 0 12px #ff3e7f);
+  --btn-bg: rgba(255,255,255,0.9);
+  --btn-accent: #ff3e7f;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Outfit',sans-serif;
+}
+
+body{
+background:var(--bg);
+color:var(--text);
+}
+
+/* Global theme color override for common elements */
+header, nav, section, footer, .trending, .features, .hero, .info, .badge, .card, .movie-type {
+  color: var(--text) !important;
+}
+
+/* HEADER */
+
+header{
+width:100%;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:20px 80px;
+background:var(--header-bg);
+backdrop-filter:blur(12px);
+position:sticky;
+top:0;
+z-index:1000;
+}
+
+/* LOGO */
+
+.logo{
+display:flex;
+align-items:center;
+gap:12px;
+font-size:34px;
+font-weight:600;
+color:var(--text);
+}
+
+.logo-icon{
+width:36px;
+height:36px;
+border-radius:10px;
+background:linear-gradient(45deg,#7c3aed,#ff3e7f);
+display:flex;
+align-items:center;
+justify-content:center;
+color:var(--text);
+}
+
+/* NAV */
+
+nav ul{
+display:flex;
+list-style:none;
+gap:40px;
+align-items:center;
+}
+
+nav ul li{
+position:relative;
+}
+
+nav ul li a{
+display:flex;
+align-items:center;
+gap:8px;
+text-decoration:none;
+color:var(--text);
+font-size:16px;
+font-weight:500;
+cursor:pointer;
+}
+
+/* DROPDOWN */
+
+.dropdown{
+position:absolute;
+top:100%;
+left:0;
+background: var(--bg);
+padding:18px;
+border-radius:12px;
+display:none;
+flex-direction:column;
+gap:12px;
+min-width:170px;
+box-shadow:0 15px 50px rgba(0,0,0,0.5);
+border:1px solid rgba(255,255,255,0.08);
+backdrop-filter:none;
+}
+
+/* DESKTOP HOVER */
+
+@media(min-width:901px){
+
+nav ul li:hover > .dropdown{
+display:flex;
+}
+
+}
+
+/* MOBILE DROPDOWN */
+
+.dropdown.active{
+display:flex;
+}
+
+/* RIGHT SIDE */
+
+.right{
+display:flex;
+align-items:center;
+gap:30px;
+}
+
+.search{
+color:var(--text);
+font-size:18px;
+cursor:pointer;
+}
+
+.contact{
+background:linear-gradient(90deg,var(--accent1),var(--accent2));
+padding:12px 26px;
+border-radius:35px;
+color:var(--text);
+font-size:15px;
+font-weight:600;
+display:flex;
+align-items:center;
+gap:10px;
+text-decoration:none;
+}
+
+.hamburger{
+display:none;
+font-size:24px;
+color:var(--text);
+cursor:pointer;
+}
+
+/* MOBILE FULL SCREEN MENU */
+
+.mobile-menu{
+position:fixed;
+top:0;
+left:-100%;
+width:100%;
+height:100vh;
+background:var(--bg);
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+transition:.4s;
+z-index:2000;
+}
+
+.mobile-menu.active{
+left:0;
+}
+
+.mobile-menu ul{
+list-style:none;
+text-align:center;
+}
+
+.mobile-menu li{
+margin:20px 0;
+}
+
+.mobile-menu a{
+color:var(--text);
+font-size:26px;
+text-decoration:none;
+display:flex;
+align-items:center;
+gap:10px;
+justify-content:center;
+}
+
+.mobile-dropdown{
+display:none;
+margin-top:10px;
+}
+
+.mobile-dropdown a{
+display:block;
+font-size:18px;
+color:var(--muted);
+margin:8px 0;
+}
+
+.mobile-dropdown.active{
+display:block;
+}
+
+.close{
+position:absolute;
+top:30px;
+right:35px;
+font-size:30px;
+color:var(--text);
+cursor:pointer;
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+header{
+padding:20px 25px;
+}
+
+nav,
+.search,
+.contact{
+display:none;
+}
+
+.hamburger{
+display:block;
+}
+
+.logo{
+font-size:26px;
+}
+
+}
+.logo img{
+height: 60px;
+width:auto;
+object-fit:contain;
+
+/* double shade effect */
+filter: var(--logo-filter);
+
+transition:0.3s;
+}
+
+/* hover glow */
+.logo img:hover{
+filter: var(--logo-filter-hover);
+}
+</style>
+</head>
+<body>
+
+<header>
+
+<div class="logo">
+<img src="logo.webp" alt="Stackly Logo">
+</div>
+
+<nav id="navMenu">
+<ul>
+
+<li>
+<a onclick="toggleDropdown(this)">
+<i class="fa-solid fa-house" style="color: #ff3e7f;"></i> HOME <i class="fa-solid fa-chevron-down"></i>
+</a>
+
+<div class="dropdown">
+<a href="home.html">Home 1</a>
+<a href="home2.html">Home 2</a>
+</div>
+
+</li>
+
+<li>
+<a href="movies.html"><i class="fa-solid fa-film"></i> MOVIES</a>
+</li>
+
+<li>
+<a href="about.html"><i class="fa-solid fa-heart"></i> ABOUT US</a>
+</li>
+
+<li>
+<a href="pages.html"><i class="fa-solid fa-file"></i> DASHBOARD</a>
+</li>
+
+<li>
+<a href="shop.html"><i class="fa-solid fa-bag-shopping"></i> SHOP</a>
+</li>
+
+<li>
+<a href="contact.html"><i class="fa-solid fa-newspaper"></i> CONTACT US</a>
+</li>
+
+</ul>
+</nav>
+
+<div class="right">
+
+<i class="fa-solid fa-magnifying-glass search"></i>
+
+<a href="login.html" class="contact">
+<i class="fa-solid fa-crown"></i>
+LOGIN NOW
+</a>
+
+<button id="theme-toggle" aria-label="Toggle theme" title="Toggle theme">
+  <i class="fa-solid fa-moon"></i>
+</button>
+
+<div class="hamburger" onclick="openMenu()">
+<i class="fa-solid fa-bars"></i>
+</div>
+
+</div>
+
+</header>
+
+<!-- MOBILE MENU -->
+
+<div class="mobile-menu" id="mobileMenu">
+
+<div class="close" onclick="closeMenu()">
+<i class="fa-solid fa-xmark"></i>
+</div>
+
+<ul>
+
+<li>
+
+<a onclick="toggleMobileDropdown()">
+<i class="fa-solid fa-house"></i> HOME
+</a>
+
+<div class="mobile-dropdown" id="mobileDrop">
+<a href="home.html">Home 1</a>
+<a href="home2.html">Home 2</a>
+</div>
+
+</li>
+
+<li><a href="movies.html"><i class="fa-solid fa-film"></i> MOVIES</a></li>
+<li><a href="about.html"><i class="fa-solid fa-heart"></i> ABOUT US</a></li>
+<li><a href="pages.html"><i class="fa-solid fa-file"></i> DASHBOARD</a></li>
+<li><a href="shop.html"><i class="fa-solid fa-bag-shopping"></i> SHOP</a></li>
+<li><a href="contact.html"><i class="fa-solid fa-newspaper"></i> CONTACT US</a></li>
+<li><a href="login.html"><i class="fa-solid fa-newspaper"></i> LOGIN</a></li>
+
+</ul>
+
+</div>
+
+<script>
+
+function toggleDropdown(element){
+
+if(window.innerWidth <= 900){
+
+let dropdown = element.nextElementSibling;
+dropdown.classList.toggle("active");
+
+}
+
+}
+
+function openMenu(){
+document.getElementById("mobileMenu").classList.add("active");
+}
+
+function closeMenu(){
+document.getElementById("mobileMenu").classList.remove("active");
+}
+
+function toggleMobileDropdown(){
+document.getElementById("mobileDrop").classList.toggle("active");
+}
+
+</script>
+
+<!-- GOOGLE FONT -->
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<section class="hero">
+
+<video id="bgVideo" autoplay muted loop></video>
+
+<div class="hero-overlay"></div>
+
+<div class="hero-content">
+
+<div class="badges">
+<div class="badge"><i class="fa fa-star"></i> 4.9 Reviews</div>
+<div class="badge"><i class="fa fa-clock"></i> 02h 30m</div>
+<div class="badge">4K Quality</div>
+</div>
+
+<h1 id="heroTitle"></h1>
+
+<p id="heroDesc"></p>
+
+<div class="buttons">
+
+<!-- WATCH BUTTON -->
+<a href="404.html" class="watch">
+<i class="fa fa-play"></i> WATCH NOW
+</a>
+
+<!-- TRAILER BUTTON -->
+<a href="404.html" class="trailer">
+<i class="fa fa-circle-play"></i> PLAY TRAILER
+</a>
+
+</div>
+
+</div>
+
+
+<div class="movie-card">
+
+<img id="cardImage">
+
+<div class="movie-title" id="cardTitle"></div>
+
+<div class="movie-type" id="cardType"></div>
+
+</div>
+
+
+<div class="slider-number" id="slideNumber"></div>
+
+
+<div class="arrows">
+
+<div class="arrow" onclick="prevSlide()">
+<i class="fa fa-arrow-left"></i>
+</div>
+
+<div class="arrow" onclick="nextSlide()">
+<i class="fa fa-arrow-right"></i>
+</div>
+
+</div>
+
+</section>
+
+<style>
+
+.hero{
+position:relative;
+height:100vh;
+width:100%;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 120px;
+color:var(--text);
+overflow:hidden;
+font-family:'Outfit',sans-serif;
+}
+
+/* VIDEO BACKGROUND */
+
+.hero video{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+object-fit:cover;
+z-index:-2;
+}
+
+/* DARK OVERLAY */
+
+.hero-overlay{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+
+background:linear-gradient(90deg, var(--overlay) 0%, rgba(0,0,0,0.5) 30%, transparent 80%);
+
+z-index:-1;
+}
+
+/* CONTENT */
+
+.hero-content{
+max-width:650px;
+}
+
+/* BADGES */
+
+.badges{
+display:flex;
+gap:18px;
+margin-bottom:25px;
+}
+
+.badge{
+background:var(--card-bg);
+padding:10px 16px;
+border-radius:10px;
+font-size:14px;
+display:flex;
+align-items:center;
+gap:6px;
+}
+
+/* BIG CINEMATIC TITLE */
+
+.hero h1{
+font-family:'Bebas Neue',sans-serif;
+font-size:120px;
+letter-spacing:4px;
+line-height:1;
+margin-bottom:20px;
+
+ background:linear-gradient(90deg,var(--text),var(--muted));
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+
+animation:titleFade 1s ease;
+}
+
+/* DESCRIPTION */
+
+.hero p{
+color:var(--muted);
+margin-bottom:35px;
+font-size:18px;
+line-height:1.6;
+
+animation:fadeText 1.3s ease;
+}
+
+/* BUTTONS */
+
+.buttons{
+display:flex;
+gap:20px;
+}
+
+.watch{
+background:linear-gradient(90deg,var(--accent1),var(--accent2));
+padding:16px 34px;
+border-radius:35px;
+text-decoration:none;
+color:var(--text);
+font-weight:600;
+display:flex;
+align-items:center;
+gap:10px;
+transition:.3s;
+}
+
+.watch:hover{
+transform:scale(1.08);
+box-shadow:0 10px 30px rgba(255,0,150,0.4);
+}
+
+.trailer{
+border:1px solid rgba(255,255,255,0.08);
+padding:16px 34px;
+border-radius:35px;
+text-decoration:none;
+color:var(--text);
+display:flex;
+align-items:center;
+gap:10px;
+transition:.3s;
+}
+
+.trailer:hover{
+background:rgba(255,255,255,0.04);
+}
+
+/* MOVIE CARD */
+
+.movie-card{
+position:absolute;
+right:160px;
+top:50%;
+transform:translateY(-50%);
+text-align:center;
+}
+
+.movie-card img{
+width:260px;
+border-radius:24px;
+box-shadow:0 20px 50px rgba(0,0,0,0.6);
+transition:.4s;
+}
+
+.movie-card img:hover{
+transform:scale(1.08) rotate(2deg);
+}
+
+.movie-title{
+margin-top:18px;
+font-size:24px;
+font-weight:600;
+}
+
+.movie-type{
+color:var(--muted);
+font-size:15px;
+}
+
+/* SLIDE NUMBER */
+
+.slider-number{
+position:absolute;
+right:70px;
+top:50%;
+transform:translateY(-50%);
+font-size:46px;
+font-weight:600;
+opacity:0.85;
+}
+
+/* ARROWS */
+
+.arrows{
+position:absolute;
+bottom:70px;
+right:160px;
+display:flex;
+gap:20px;
+}
+
+.arrow{
+width:65px;
+height:65px;
+border-radius:50%;
+border:2px solid rgba(255,255,255,0.12);
+display:flex;
+align-items:center;
+justify-content:center;
+cursor:pointer;
+transition:.3s;
+font-size:20px;
+}
+
+.arrow:hover{
+border-color:#ff3e7f;
+}
+
+/* ANIMATIONS */
+
+@keyframes titleFade{
+0%{
+opacity:0;
+transform:translateY(40px);
+}
+100%{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+@keyframes fadeText{
+0%{
+opacity:0;
+transform:translateY(20px);
+}
+100%{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+.hero{
+padding:0 30px;
+}
+
+.hero h1{
+font-size:60px;
+}
+
+.movie-card,
+.slider-number{
+display:none;
+}
+
+.arrows{
+right:30px;
+}
+
+}
+
+</style>
+
+
+<script>
+
+const slides=[
+
+{
+video:"bg1.mp4",
+title:"THE DARK BEAUTY",
+desc:"Enjoy your favorite movies, tv show, sports, news, Live event and entertainment streaming now!",
+cardImg:"bg1.webp",
+cardTitle:"ENIGMA OF SHADOWS",
+cardType:"Action Movies"
+},
+
+{
+video:"bg2.mp4",
+title:"THE LAST HERO",
+desc:"Stream blockbuster action movies and thrilling adventures anytime.",
+cardImg:"bg2.webp",
+cardTitle:"HERO RISING",
+cardType:"Adventure Movies"
+},
+
+{
+video:"bg3.mp4",
+title:"SHADOW HUNTER",
+desc:"Explore mysterious worlds and legendary heroes.",
+cardImg:"bg3.webp",
+cardTitle:"SHADOW LEGENDS",
+cardType:"Fantasy Movies"
+}
+
+];
+
+let current=0;
+
+const video=document.getElementById("bgVideo");
+const title=document.getElementById("heroTitle");
+const desc=document.getElementById("heroDesc");
+const img=document.getElementById("cardImage");
+const cardTitle=document.getElementById("cardTitle");
+const cardType=document.getElementById("cardType");
+const number=document.getElementById("slideNumber");
+
+function loadSlide(i){
+
+video.src=slides[i].video;
+
+title.innerHTML=slides[i].title;
+
+desc.innerHTML=slides[i].desc;
+
+img.src=slides[i].cardImg;
+
+cardTitle.innerHTML=slides[i].cardTitle;
+
+cardType.innerHTML=slides[i].cardType;
+
+number.innerHTML=`0${i+1} / 0${slides.length}`;
+
+}
+
+function nextSlide(){
+
+current++;
+
+if(current>=slides.length) current=0;
+
+loadSlide(current);
+
+}
+
+function prevSlide(){
+
+current--;
+
+if(current<0) current=slides.length-1;
+
+loadSlide(current);
+
+}
+
+loadSlide(current);
+
+/* AUTO SLIDER */
+
+setInterval(nextSlide,6000);
+
+</script>
+<script>
+/* Theme toggle: persist and update UI */
+(function(){
+  const stored = localStorage.getItem('theme');
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const theme = stored || (prefersDark ? 'dark' : 'light');
+  document.documentElement.setAttribute('data-theme', theme);
+  const btn = document.getElementById('theme-toggle');
+  if(btn){ btn.addEventListener('click', toggleTheme); }
+  updateToggleIcon();
+})();
+
+function toggleTheme(){
+  const current = document.documentElement.getAttribute('data-theme') || 'dark';
+  const next = current === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+  updateToggleIcon();
+}
+
+function updateToggleIcon(){
+  const btn = document.getElementById('theme-toggle');
+  if(!btn) return;
+  const icon = btn.querySelector('i');
+  if(document.documentElement.getAttribute('data-theme') === 'dark'){
+    icon.className = 'fa-solid fa-moon';
+  } else {
+    icon.className = 'fa-solid fa-sun';
+  }
+}
+</script>
+<section class="trending">
+
+<h2>⚡ TRENDING NOW</h2>
+
+<div class="slider">
+
+<div class="slide-track">
+
+<!-- card -->
+<div class="card">
+<img src="bg2.webp">
+
+<div class="overlay">
+<div class="play">▶</div>
+
+<div class="info">
+<h3>SHADOW BLITZ</h3>
+<p>⭐ 8.3 | ⏱ 02h 40m | 4K</p>
+<span>Action, War, Crime</span>
+</div>
+
+</div>
+</div>
+
+<!-- card -->
+<div class="card">
+<img src="KUNG.webp">
+<div class="overlay">
+<div class="play">▶</div>
+
+<div class="info">
+<h3>KUNG FU PANDA</h3>
+<p>⭐ 8.1 | ⏱ 01h 55m | 4K</p>
+<span>Animation</span>
+</div>
+
+</div>
+</div>
+
+<!-- card -->
+<div class="card">
+<img src="SPACE.webp">
+<div class="overlay">
+<div class="play">▶</div>
+
+<div class="info">
+<h3>SPACE CAT</h3>
+<p>⭐ 7.9 | ⏱ 02h 05m | HD</p>
+<span>Adventure</span>
+</div>
+
+</div>
+</div>
+
+
+<!-- duplicate for infinite loop -->
+
+<div class="card">
+<img src="bg2.webp">
+<div class="overlay">
+<div class="play">▶</div>
+
+<div class="info">
+<h3>SHADOW BLITZ</h3>
+<p>⭐ 8.3 | ⏱ 02h 40m | 4K</p>
+<span>Action</span>
+</div>
+
+</div>
+</div>
+
+<div class="card">
+<img src="KUNG.webp">
+<div class="overlay">
+<div class="play">▶</div>
+
+<div class="info">
+<h3>KUNG FU PANDA</h3>
+<p>⭐ 8.1 | ⏱ 01h 55m | 4K</p>
+<span>Animation</span>
+</div>
+
+</div>
+</div>
+
+<div class="card">
+<img src="SPACE.webp">
+<div class="overlay">
+<div class="play">▶</div>
+
+<div class="info">
+<h3>SPACE CAT</h3>
+<p>⭐ 7.9 | ⏱ 02h 05m | HD</p>
+<span>Adventure</span>
+</div>
+
+</div>
+</div>
+
+</div>
+</div>
+
+</section>
+<style>
+    body{
+  background:var(--bg);
+  font-family:Poppins;
+  color:var(--text);
+  }
+
+.trending{
+padding:60px;
+color:var(--text);
+overflow:hidden;
+}
+
+.trending h2{
+font-size:32px;
+margin-bottom:30px;
+}
+
+.slider{
+overflow:hidden;
+position:relative;
+}
+
+.slide-track{
+display:flex;
+gap:25px;
+width:calc(260px * 6);
+animation:scroll 25s linear infinite;
+}
+
+@keyframes scroll{
+
+0%{
+transform:translateX(0);
+}
+
+100%{
+transform:translateX(calc(-260px * 3));
+}
+
+}
+
+.card{
+width:260px;
+height:360px;
+border-radius:20px;
+overflow:hidden;
+position:relative;
+flex-shrink:0;
+cursor:pointer;
+}
+
+.card img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+.overlay{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+display:flex;
+justify-content:center;
+align-items:center;
+background:var(--overlay);
+opacity:0;
+transition:.4s;
+}
+
+.card:hover .overlay{
+opacity:1;
+}
+
+.play{
+width:80px;
+height:80px;
+border-radius:50%;
+background:rgba(255,255,255,0.3);
+backdrop-filter:blur(10px);
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:28px;
+}
+
+.info{
+position:absolute;
+bottom:15px;
+left:50%;
+transform:translateX(-50%);
+width:90%;
+background:var(--card-bg);
+backdrop-filter:blur(10px);
+border-radius:20px;
+padding:15px;
+text-align:center;
+}
+
+.info h3{
+font-size:18px;
+}
+
+.info p{
+font-size:14px;
+color:var(--muted);
+}
+
+.info span{
+font-size:12px;
+opacity:.8;
+color:var(--muted);
+}
+@media (max-width:768px){
+
+.trending{
+padding:40px 15px;
+}
+
+.trending h2{
+font-size:24px;
+margin-bottom:20px;
+}
+
+.slide-track{
+gap:15px;
+width:calc(200px * 6);
+animation:scroll 18s linear infinite;
+}
+
+@keyframes scroll{
+
+0%{
+transform:translateX(0);
+}
+
+100%{
+transform:translateX(calc(-200px * 3));
+}
+
+}
+
+.card{
+width:200px;
+height:280px;
+border-radius:16px;
+}
+
+.play{
+width:60px;
+height:60px;
+font-size:20px;
+}
+
+.info{
+padding:10px;
+}
+
+.info h3{
+font-size:14px;
+}
+
+.info p{
+font-size:12px;
+}
+
+.info span{
+font-size:11px;
+}
+
+}
+</style>
+<section class="features" id="features">
+
+<h2>HOLAA IS OFFERS SUPERIOR LIVE <br> TV STREAMING</h2>
+
+<div class="feature-container">
+
+<div class="feature-card">
+<i class="fa-solid fa-play"></i>
+<h3>FLEXIBLE</h3>
+<p>Flexible streaming allows users to customize their viewing experience</p>
+</div>
+
+<div class="feature-card">
+<i class="fa-solid fa-thumbs-up"></i>
+<h3>SUPER FAST QUALITY</h3>
+<p>Flexible streaming allows users to customize their viewing experience</p>
+</div>
+
+<div class="feature-card">
+<i class="fa-solid fa-circle-play"></i>
+<h3>WATCH FROM ANYWHERE</h3>
+<p>Flexible streaming allows users to customize their viewing experience</p>
+</div>
+
+</div>
+
+</section>
+<style>
+    .features{
+  background:var(--bg);
+  padding:150px 80px;
+  text-align:center;
+  color:var(--text);
+  border-radius:40px;
+  }
+
+.features h2{
+font-size:52px;
+margin-bottom:80px;
+}
+
+.feature-container{
+display:flex;
+justify-content:center;
+gap:50px;
+flex-wrap:wrap;
+}
+
+.feature-card{
+background:var(--card-bg);
+width:320px;
+padding:60px 40px;
+border-radius:35px;
+
+transform:translateX(250px);
+opacity:0;
+transition:all 0.8s ease;
+}
+
+.feature-card.show{
+transform:translateX(0);
+opacity:1;
+}
+
+.feature-card:nth-child(2){transition-delay:.2s;}
+.feature-card:nth-child(3){transition-delay:.4s;}
+.feature-card:nth-child(4){transition-delay:.6s;}
+
+.feature-card i{
+font-size:60px;
+margin-bottom:25px;
+background:linear-gradient(45deg,#ff00ff,#ff7a00);
+-webkit-background-clip:text;
+color:transparent;
+}
+
+.feature-card h3{
+font-size:24px;
+margin-bottom:15px;
+}
+
+.feature-card p{
+color:var(--muted);
+font-size:16px;
+line-height:1.6;
+}
+
+.feature-card:hover{
+transform:translateY(-15px) scale(1.05);
+background:rgba(0,0,0,0.12);
+box-shadow:0 20px 60px rgba(0,0,0,0.6);
+}
+@media (max-width:768px){
+
+.features{
+padding:70px 20px;
+border-radius:20px;
+}
+
+.features h2{
+font-size:28px;
+line-height:1.4;
+margin-bottom:40px;
+}
+
+.feature-container{
+flex-direction:column;
+align-items:center;
+gap:25px;
+}
+
+.feature-card{
+width:100%;
+max-width:320px;
+padding:35px 25px;
+transform:translateX(120px);
+}
+
+.feature-card i{
+font-size:40px;
+margin-bottom:18px;
+}
+
+.feature-card h3{
+font-size:18px;
+}
+
+.feature-card p{
+font-size:14px;
+}
+
+}
+</style>
+<script>
+
+const cards = document.querySelectorAll(".feature-card");
+
+window.addEventListener("scroll", () => {
+
+cards.forEach(card => {
+
+const cardTop = card.getBoundingClientRect().top;
+const trigger = window.innerHeight * 0.85;
+
+if(cardTop < trigger){
+card.classList.add("show");
+}
+
+});
+
+});
+
+</script>
+<section class="stream-section">
+
+<div class="stream-header">
+<h2>Popular Movies</h2>
+<p>Trending this week</p>
+</div>
+
+<div class="stream-slider">
+
+<div class="stream-card">
+<img src="di.webp">
+<div class="stream-info">
+<h3>Moonlight Odyssey</h3>
+<span>Adventure • Movie</span>
+<a href="404.html" class="watch-btn">Watch Now</a>
+</div>
+</div>
+
+<div class="stream-card">
+<img src="di1.webp">
+<div class="stream-info">
+<h3>Crimson Horizon</h3>
+<span>Fantasy • Movie</span>
+<a href="404.html" class="watch-btn">Watch Now</a>
+</div>
+</div>
+
+<div class="stream-card">
+<img src="di6.webp">
+<div class="stream-info">
+<h3>Shadow of the Empire</h3>
+<span>Sci-Fi • Movie</span>
+<a href="404.html" class="watch-btn">Watch Now</a>
+</div>
+</div>
+
+<div class="stream-card">
+<img src="coco.webp">
+<div class="stream-info">
+<h3>Whispers of Avalon</h3>
+<span>Adventure • Movie</span>
+<a href="404.html" class="watch-btn">Watch Now</a>
+</div>
+</div>
+
+<div class="stream-card">
+<img src="KUNG.webp">
+<div class="stream-info">
+<h3>Frozen Legends</h3>
+<span>Fantasy • Series</span>
+<a href="404.html" class="watch-btn">Watch Now</a>
+</div>
+</div>
+
+<div class="stream-card">
+<img src="toy.webp">
+<div class="stream-info">
+<h3>Clockwork Kingdom</h3>
+<span>Animation • Movie</span>
+<a href="404.html" class="watch-btn">Watch Now</a>
+</div>
+</div>
+
+<div class="stream-card">
+<img src="coco.webp">
+<div class="stream-info">
+<h3>Echoes of Eternity</h3>
+<span>Music • Movie</span>
+<a href="404.html" class="watch-btn">Watch Now</a>
+</div>
+</div>
+
+</div>
+</section>
+
+<style>
+
+.stream-section{
+background:var(--bg);
+padding:70px 50px;
+color:var(--text);
+}
+
+.stream-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:30px;
+}
+
+.stream-header h2{
+font-size:34px;
+}
+
+.stream-header p{
+opacity:.7;
+}
+
+/* slider */
+
+.stream-slider{
+display:flex;
+gap:25px;
+overflow-x:auto;
+scroll-behavior:smooth;
+padding-bottom:10px;
+}
+
+.stream-slider::-webkit-scrollbar{
+height:6px;
+}
+
+.stream-slider::-webkit-scrollbar-thumb{
+background:var(--accent2);
+border-radius:10px;
+}
+
+/* card */
+
+.stream-card{
+min-width:260px;
+background:var(--card-bg);
+border-radius:20px;
+overflow:hidden;
+flex-shrink:0;
+transition:.3s;
+}
+
+.stream-card img{
+width:100%;
+height:180px;
+object-fit:cover;
+}
+
+.stream-info{
+padding:18px;
+}
+
+.stream-info h3{
+margin-bottom:5px;
+}
+
+.stream-info span{
+font-size:14px;
+opacity:.7;
+display:block;
+margin-bottom:15px;
+}
+
+.watch-btn{
+display:block;
+text-align:center;
+padding:10px;
+border-radius:30px;
+border:1px solid var(--accent1);
+color:var(--text);
+text-decoration:none;
+transition:.3s;
+}
+
+.watch-btn:hover{
+background:var(--accent1);
+}
+
+.stream-card:hover{
+transform:translateY(-8px);
+}
+
+/* mobile */
+
+@media (max-width:768px){
+
+.stream-section{
+padding:50px 20px;
+}
+
+.stream-header h2{
+font-size:24px;
+}
+
+.stream-card{
+min-width:200px;
+}
+
+.stream-card img{
+height:140px;
+}
+
+}
+
+</style>
+
+
+<section class="trending">
+
+<h2>⚡ TRENDING NOW</h2>
+
+<div class="slider">
+
+<div class="slide-track">
+
+<!-- card -->
+<div class="card">
+<img src="bg2.webp">
+
+<div class="overlay">
+<div class="play">▶</div>
+
+<div class="info">
+<h3>SHADOW BLITZ</h3>
+<p>⭐ 8.3 | ⏱ 02h 40m | 4K</p>
+<span>Action, War, Crime</span>
+</div>
+
+</div>
+</div>
+
+<!-- card -->
+<div class="card">
+<img src="KUNG.webp">
+<div class="overlay">
+<div class="play">▶</div>
+
+<div class="info">
+<h3>KUNG FU PANDA</h3>
+<p>⭐ 8.1 | ⏱ 01h 55m | 4K</p>
+<span>Animation</span>
+</div>
+
+</div>
+</div>
+
+<!-- card -->
+<div class="card">
+<img src="SPACE.webp">
+<div class="overlay">
+<div class="play">▶</div>
+
+<div class="info">
+<h3>SPACE</h3>
+<p>⭐ 7.9 | ⏱ 02h 05m | HD</p>
+<span>Adventure</span>
+</div>
+
+</div>
+</div>
+
+
+<!-- duplicate for infinite loop -->
+
+<div class="card">
+<img src="bg2.webp">
+<div class="overlay">
+<div class="play">▶</div>
+
+<div class="info">
+<h3>SHADOW BLITZ</h3>
+<p>⭐ 8.3 | ⏱ 02h 40m | 4K</p>
+<span>Action</span>
+</div>
+
+</div>
+</div>
+
+<div class="card">
+<img src="KUNG.webp">
+<div class="overlay">
+<div class="play">▶</div>
+
+<div class="info">
+<h3>KUNG FU PANDA</h3>
+<p>⭐ 8.1 | ⏱ 01h 55m | 4K</p>
+<span>Animation</span>
+</div>
+
+</div>
+</div>
+
+<div class="card">
+<img src="SPACE.webp">
+<div class="overlay">
+<div class="play">▶</div>
+
+<div class="info">
+<h3>SPACE CAT</h3>
+<p>⭐ 7.9 | ⏱ 02h 05m | HD</p>
+<span>Adventure</span>
+</div>
+
+</div>
+</div>
+
+</div>
+</div>
+
+</section>
+<!-- GOOGLE FONTS -->
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<section class="count-hero">
+
+<video id="countVideo" autoplay muted playsinline></video>
+
+<div class="count-overlay"></div>
+
+<div class="count-box">
+
+<h1 id="countTitle">THE DARK BEAUTY</h1>
+
+<p id="countDesc">
+Shadow Blitzstrike is a dynamic and elusive move executed with lightning-fast precision.
+</p>
+
+<div class="count-buttons">
+<a href="#" class="count-watch">▶ WATCH NOW</a>
+<a href="#" class="count-trailer">⦿ PLAY TRAILER</a>
+</div>
+
+</div>
+
+</section>
+
+
+<style>
+
+body{
+font-family:"Outfit",sans-serif;
+background:var(--bg);
+margin:0;
+color:var(--text);
+}
+
+/* HERO */
+
+.count-hero{
+position:relative;
+height:80vh;
+border-radius:30px;
+overflow:hidden;
+margin:40px;
+}
+
+/* VIDEO */
+
+#countVideo{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+object-fit:cover;
+z-index:1;
+transition:opacity 1s ease;
+}
+
+/* DARK OVERLAY */
+
+.count-overlay{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:linear-gradient(90deg,var(--overlay), rgba(0,0,0,0.2));
+z-index:2;
+}
+
+/* CONTENT */
+
+.count-box{
+position:absolute;
+right:8%;
+top:50%;
+transform:translateY(-50%);
+color:var(--text);
+max-width:500px;
+z-index:3;
+}
+
+/* TITLE */
+
+.count-box h1{
+font-family:"Bebas Neue",sans-serif;
+font-size:70px;
+letter-spacing:2px;
+margin-bottom:20px;
+animation:titleAnim 1s ease;
+}
+
+@keyframes titleAnim{
+from{
+transform:translateY(30px);
+opacity:0;
+}
+to{
+transform:translateY(0);
+opacity:1;
+}
+}
+
+/* DESCRIPTION */
+
+.count-box p{
+font-size:16px;
+opacity:.85;
+line-height:1.7;
+margin-bottom:30px;
+}
+
+/* BUTTONS */
+
+.count-buttons{
+display:flex;
+gap:20px;
+}
+
+.count-watch{
+padding:14px 30px;
+border-radius:12px;
+background:linear-gradient(45deg,#8a2be2,#ff2f7d);
+color:white;
+text-decoration:none;
+font-weight:600;
+transition:.3s;
+}
+
+.count-watch:hover{
+transform:translateY(-3px);
+box-shadow:0 10px 25px rgba(255,0,150,.4);
+}
+
+.count-trailer{
+padding:14px 30px;
+border-radius:12px;
+border:1px solid rgba(255,255,255,0.7);
+color:white;
+text-decoration:none;
+transition:.3s;
+}
+
+.count-trailer:hover{
+background:rgba(255,255,255,0.1);
+transform:translateY(-3px);
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+.count-hero{
+height:65vh;
+margin:15px;
+}
+
+.count-box{
+left:20px;
+right:20px;
+top:60%;
+}
+
+.count-box h1{
+font-size:40px;
+}
+
+.count-buttons{
+flex-direction:column;
+}
+
+}
+
+</style>
+
+
+<script>
+
+const countVideos = [
+
+{
+src:"bg1.mp4",
+title:"THE DARK BEAUTY",
+desc:"Shadow Blitzstrike is a dynamic and elusive move executed with lightning-fast precision."
+},
+
+{
+src:"bg2.mp4",
+title:"SHADOW HUNTER",
+desc:"A fearless warrior rises in the darkness to reclaim the lost kingdom."
+},
+
+{
+src:"bg3.mp4",
+title:"LEGEND OF FIRE",
+desc:"When flames awaken, destiny begins and heroes rise from the ashes."
+}
+
+];
+
+let countIndex = 0;
+
+const countVideo = document.getElementById("countVideo");
+const countTitle = document.getElementById("countTitle");
+const countDesc = document.getElementById("countDesc");
+
+/* first video */
+
+countVideo.src = countVideos[0].src;
+countVideo.play();
+
+/* change video */
+
+countVideo.addEventListener("ended", () => {
+
+countVideo.style.opacity = 0;
+
+setTimeout(()=>{
+
+countIndex++;
+
+if(countIndex >= countVideos.length){
+countIndex = 0;
+}
+
+countVideo.src = countVideos[countIndex].src;
+countTitle.textContent = countVideos[countIndex].title;
+countDesc.textContent = countVideos[countIndex].desc;
+
+countVideo.play();
+countVideo.style.opacity = 1;
+
+},500)
+
+});
+
+</script>
+
+<section class="premium-section">
+
+<div class="premium-container">
+
+<div class="premium-icons">
+
+<div class="premium-icon">
+<i class="fa-solid fa-download"></i>
+</div>
+
+<div class="premium-icon">
+<i class="fa-solid fa-headphones"></i>
+</div>
+
+<div class="premium-icon">
+<i class="fa-solid fa-play"></i>
+</div>
+
+</div>
+
+
+<div class="premium-content">
+
+<h2>Upgrade to YouTube Premium free of charge</h2>
+
+<span class="premium-small">YouTube featured</span>
+
+<p>Endless ad-free entertainment is waiting for you</p>
+
+<button class="premium-btn">1 month trial</button>
+
+</div>
+
+</div>
+
+</section>
+
+<style>
+    .premium-section{
+  background:var(--bg);
+  padding:80px 60px;
+  opacity:0;
+  transform:translateY(40px);
+  transition:1s ease;
+  }
+
+.premium-section.show{
+opacity:1;
+transform:translateY(0);
+}
+
+.premium-container{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:60px;
+flex-wrap:wrap;
+}
+
+.premium-icons{
+display:flex;
+gap:30px;
+position:relative;
+}
+
+.premium-icon{
+width:90px;
+height:90px;
+background:var(--card-bg);
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:30px;
+color:var(--accent2);
+box-shadow:0 10px 25px rgba(0,0,0,0.1);
+}
+
+.premium-content h2{
+font-size:36px;
+margin-bottom:10px;
+}
+
+.premium-small{
+font-size:14px;
+color:var(--muted);
+}
+
+.premium-content p{
+margin:15px 0 25px;
+color:var(--muted);
+}
+
+.premium-btn{
+padding:10px 20px;
+border:none;
+background:var(--btn-bg);
+color:var(--text);
+border-radius:20px;
+cursor:pointer;
+font-size:14px;
+}
+
+/* mobile */
+
+@media(max-width:768px){
+
+.premium-section{
+padding:50px 20px;
+}
+
+.premium-container{
+flex-direction:column;
+text-align:center;
+}
+
+.premium-icons{
+justify-content:center;
+}
+
+.premium-content h2{
+font-size:24px;
+}
+
+}
+</style>
+<script>
+
+const premiumSection = document.querySelector(".premium-section");
+
+window.addEventListener("scroll", () => {
+
+const sectionTop = premiumSection.getBoundingClientRect().top;
+const trigger = window.innerHeight * 0.85;
+
+if(sectionTop < trigger){
+premiumSection.classList.add("show");
+}
+
+});
+
+</script>
+<section class="explore">
+
+<div class="explore-header">
+
+<h2>Explore Videos</h2>
+
+<div class="explore-right">
+<span>More on Topic</span>
+<a href="404.html" class="explore-btn">More Posts →</a>
+</div>
+
+</div>
+
+
+<div class="explore-grid">
+
+<!-- CARD 1 -->
+<div class="video-card">
+<div class="video-thumb">
+<img src="coco.webp">
+<a href="404.html" class="play-btn">▶</a>
+</div>
+<span class="video-cat">GAMES</span>
+<h3>Learn How to Mix Your Favorite Music Videos</h3>
+<div class="video-meta">
+<span>25 JAN 2020</span>
+<span>💬 0</span>
+</div>
+</div>
+
+<!-- CARD 2 -->
+<div class="video-card">
+<div class="video-thumb">
+<img src="toy.webp">
+<a href="404.html" class="play-btn">▶</a>
+</div>
+<span class="video-cat">GAMES</span>
+<h3>Beautiful Nature Footage Taken via Drones</h3>
+<div class="video-meta">
+<span>25 JAN 2020</span>
+<span>💬 0</span>
+</div>
+</div>
+
+<!-- CARD 3 -->
+<div class="video-card">
+<div class="video-thumb">
+<img src="KUNG.webp">
+<a href="404.html" class="play-btn">▶</a>
+</div>
+<span class="video-cat">GAMES</span>
+<h3>Changing Your Gadgets to Premium Digital Items</h3>
+<div class="video-meta">
+<span>25 JAN 2020</span>
+<span>💬 0</span>
+</div>
+</div>
+
+<!-- CARD 4 -->
+<div class="video-card">
+<div class="video-thumb">
+<img src="di.webp">
+<a href="404.html" class="play-btn">▶</a>
+</div>
+<span class="video-cat">DESIGN</span>
+<h3>Best Live Male Performances in 2021 and 2022</h3>
+<div class="video-meta">
+<span>22 JAN 2020</span>
+<span>💬 0</span>
+</div>
+</div>
+
+<!-- CARD 5 -->
+<div class="video-card">
+<div class="video-thumb">
+<img src="pos1.webp">
+<a href="404.html" class="play-btn">▶</a>
+</div>
+<span class="video-cat">TRAVEL</span>
+<h3>Exploring the Hidden Desert Landscapes</h3>
+<div class="video-meta">
+<span>12 FEB 2021</span>
+<span>💬 0</span>
+</div>
+</div>
+
+<!-- CARD 6 -->
+<div class="video-card">
+<div class="video-thumb">
+<img src="pos2.webp">
+<a href="404.html" class="play-btn">▶</a>
+</div>
+<span class="video-cat">TECH</span>
+<h3>Top Gadgets That Will Change the Future</h3>
+<div class="video-meta">
+<span>18 MAR 2021</span>
+<span>💬 0</span>
+</div>
+</div>
+
+<!-- CARD 7 -->
+<div class="video-card">
+<div class="video-thumb">
+<img src="pos3.webp">
+<a href="404.html" class="play-btn">▶</a>
+</div>
+<span class="video-cat">GAMING</span>
+<h3>Ultimate Gameplay Highlights of the Year</h3>
+<div class="video-meta">
+<span>02 APR 2021</span>
+<span>💬 0</span>
+</div>
+</div>
+
+<!-- CARD 8 -->
+<div class="video-card">
+<div class="video-thumb">
+<img src="pos4.webp">
+<a href="404.html" class="play-btn">▶</a>
+</div>
+<span class="video-cat">DESIGN</span>
+<h3>Creative Design Trends That Inspire Artists</h3>
+<div class="video-meta">
+<span>15 MAY 2021</span>
+<span>💬 0</span>
+</div>
+</div>
+
+<!-- CARD 9 -->
+<div class="video-card">
+<div class="video-thumb">
+<img src="pos5.webp">
+<a href="404.html" class="play-btn">▶</a>
+</div>
+<span class="video-cat">MUSIC</span>
+<h3>Behind the Scenes of Modern Music Production</h3>
+<div class="video-meta">
+<span>20 JUN 2021</span>
+<span>💬 0</span>
+</div>
+</div>
+
+<!-- CARD 10 -->
+<div class="video-card">
+<div class="video-thumb">
+<img src="pos6.webp">
+<a href="404.html" class="play-btn">▶</a>
+</div>
+<span class="video-cat">ANIMATION</span>
+<h3>How Animated Movies Are Created Step by Step</h3>
+<div class="video-meta">
+<span>05 JUL 2021</span>
+<span>💬 0</span>
+</div>
+</div>
+
+<!-- CARD 11 -->
+<div class="video-card">
+<div class="video-thumb">
+<img src="pos7.webp">
+<a href="404.html" class="play-btn">▶</a>
+</div>
+<span class="video-cat">FILM</span>
+<h3>Inside the World of Cinematic Storytelling</h3>
+<div class="video-meta">
+<span>14 AUG 2021</span>
+<span>💬 0</span>
+</div>
+</div>
+
+<!-- CARD 12 -->
+<div class="video-card">
+<div class="video-thumb">
+<img src="pos8.webp">
+<a href="404.html" class="play-btn">▶</a>
+</div>
+<span class="video-cat">PHOTOGRAPHY</span>
+<h3>Mastering Camera Angles for Stunning Shots</h3>
+<div class="video-meta">
+<span>30 SEP 2021</span>
+<span>💬 0</span>
+</div>
+</div>
+
+</div>
+
+</section>
+
+<style>
+  .explore{
+  background:var(--bg);
+  padding:70px 60px;
+  color:var(--text);
+  }
+.play-btn{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+width:50px;
+height:50px;
+border-radius:50%;
+border:2px solid var(--text);
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:18px;
+color:var(--text);
+text-decoration:none;
+}
+.explore-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:40px;
+}
+
+.explore-header h2{
+font-size:32px;
+}
+
+.explore-right{
+display:flex;
+gap:20px;
+align-items:center;
+}
+
+.explore-right a{
+color:var(--text);
+text-decoration:none;
+font-size:14px;
+}
+
+/* GRID */
+
+.explore-grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:30px;
+}
+
+/* CARD */
+
+.video-card{
+cursor:pointer;
+}
+
+.video-thumb{
+position:relative;
+overflow:hidden;
+border-radius:10px;
+}
+
+.video-thumb img{
+width:100%;
+height:200px;
+object-fit:cover;
+transition:.4s;
+}
+
+.video-card:hover img{
+transform:scale(1.08);
+}
+
+/* play button */
+
+.play-btn{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+width:50px;
+height:50px;
+border-radius:50%;
+border:2px solid white;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:18px;
+}
+
+/* text */
+
+.video-cat{
+display:block;
+margin-top:15px;
+font-size:12px;
+opacity:.7;
+}
+
+.video-card h3{
+margin:10px 0;
+font-size:18px;
+line-height:1.4;
+}
+
+.video-meta{
+font-size:13px;
+opacity:.6;
+display:flex;
+gap:15px;
+}
+
+/* MOBILE */
+
+@media(max-width:1024px){
+.explore-grid{
+grid-template-columns:repeat(2,1fr);
+}
+}
+
+@media(max-width:600px){
+
+.explore{
+padding:50px 20px;
+}
+
+.explore-header{
+flex-direction:column;
+align-items:flex-start;
+gap:10px;
+}
+
+.explore-grid{
+grid-template-columns:1fr;
+}
+
+.video-thumb img{
+height:180px;
+}
+
+}
+.explore-btn{
+padding:8px 16px;
+border-radius:20px;
+border:1px solid rgba(255,255,255,0.4);
+color:white;
+text-decoration:none;
+font-size:14px;
+transition:.3s;
+}
+
+.explore-btn:hover{
+background:white;
+color:black;
+}
+
+</style>
+
+<section class="stories">
+
+<div class="stories-header">
+
+<h2>Popular Stories</h2>
+
+<div class="stories-right">
+<span>Trending News</span>
+<a href="404.html" class="stories-btn">More Posts →</a>
+</div>
+
+</div>
+
+
+<div class="stories-grid">
+
+<!-- STORY 1 -->
+<div class="story-card">
+
+<div class="story-thumb">
+<img src="pos1.webp">
+<a href="404.html" class="story-play">▶</a>
+</div>
+
+<span class="story-cat">DESIGN</span>
+
+<h3>Music Pleasure of Vocal Techniques</h3>
+
+<div class="story-meta">
+<span>BY SANDRA JONES</span>
+<span>22 JAN 2020</span>
+<span>💬 0</span>
+</div>
+
+</div>
+
+
+<!-- STORY 2 -->
+<div class="story-card">
+
+<div class="story-thumb">
+<img src="pos3.webp">
+<a href="404.html" class="story-play">▶</a>
+</div>
+
+<span class="story-cat">PEOPLE</span>
+
+<h3>Your Simple Destinations to Happiness</h3>
+
+<div class="story-meta">
+<span>BY DIANA LEWIS</span>
+<span>22 JAN 2020</span>
+<span>💬 0</span>
+</div>
+
+</div>
+
+</div>
+
+</section>
+<style>
+  .stories{
+  background:var(--bg);
+  padding:70px 60px;
+  color:var(--text);
+  }
+
+.stories-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:40px;
+}
+
+.stories-header h2{
+font-size:32px;
+}
+
+.stories-right{
+display:flex;
+gap:20px;
+align-items:center;
+}
+
+.stories-btn{
+color:var(--text);
+text-decoration:none;
+font-size:14px;
+border:1px solid rgba(255,255,255,0.12);
+padding:8px 16px;
+border-radius:20px;
+transition:.3s;
+}
+
+.stories-btn:hover{
+background:white;
+color:black;
+}
+
+/* GRID */
+
+.stories-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:40px;
+}
+
+/* CARD */
+
+.story-card{
+cursor:pointer;
+}
+
+.story-thumb{
+position:relative;
+overflow:hidden;
+border-radius:10px;
+}
+
+.story-thumb img{
+width:100%;
+height:320px;
+object-fit:cover;
+transition:.4s;
+}
+
+.story-card:hover img{
+transform:scale(1.08);
+}
+
+/* PLAY BUTTON */
+
+.story-play{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+width:60px;
+height:60px;
+border-radius:50%;
+border:2px solid white;
+display:flex;
+align-items:center;
+justify-content:center;
+color:white;
+text-decoration:none;
+font-size:22px;
+}
+
+/* TEXT */
+
+.story-cat{
+display:block;
+margin-top:15px;
+font-size:12px;
+opacity:.7;
+}
+
+.story-card h3{
+margin:10px 0;
+font-size:26px;
+line-height:1.4;
+}
+
+.story-meta{
+font-size:13px;
+opacity:.6;
+display:flex;
+gap:15px;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+.stories{
+padding:50px 20px;
+}
+
+.stories-grid{
+grid-template-columns:1fr;
+gap:30px;
+}
+
+.story-thumb img{
+height:220px;
+}
+
+.story-card h3{
+font-size:20px;
+}
+
+}
+</style>
+
+<section class="watch-section-hr">
+  <div class="watch-header-hr">
+    <h2>More to Watch</h2>
+    <span>Short Stories</span>
+
+    <a href="404.html" class="watch-more-hr">More Posts →</a>
+  </div>
+
+  <div class="watch-grid-hr">
+
+    <!-- BIG CARD -->
+    <div class="watch-big-hr">
+      <img src="pos4.webp" alt="video">
+
+      <a href="404.html" class="watch-play-hr">
+        <i class="fa-solid fa-play"></i>
+      </a>
+
+      <div class="watch-content-hr">
+        <span class="watch-tag-hr">GAMES</span>
+        <h3>The History of Iconic <br> Photographs & Photographers</h3>
+        <p>BY KYLIE JONES • 15 MAR 2020</p>
+      </div>
+    </div>
+
+    <!-- SMALL CARDS -->
+    <div class="watch-small-grid-hr">
+
+      <div class="watch-card-hr">
+        <img src="pos1.webp" alt="">
+        <a href="404.html" class="watch-play-hr small">
+          <i class="fa-solid fa-play"></i>
+        </a>
+        <span>GAMES</span>
+        <h4>Chasing Shadows Away – New Song Cover</h4>
+      </div>
+
+      <div class="watch-card-hr">
+        <img src="pos5.webp" alt="">
+        <a href="404.html" class="watch-play-hr small">
+          <i class="fa-solid fa-play"></i>
+        </a>
+        <span>GAMES</span>
+        <h4>What’s Your Favorite American City to Work in?</h4>
+      </div>
+
+      <div class="watch-card-hr">
+        <img src="pos3.webp" alt="">
+        <a href="404.html" class="watch-play-hr small">
+          <i class="fa-solid fa-play"></i>
+        </a>
+        <span>GAMES</span>
+        <h4>Finding New Ways Off the Beaten Path Together</h4>
+      </div>
+
+      <div class="watch-card-hr">
+        <img src="pos8.webp" alt="">
+        <a href="404.html" class="watch-play-hr small">
+          <i class="fa-solid fa-play"></i>
+        </a>
+        <span>GAMES</span>
+        <h4>The Blues Kitchen Podcast Online Studio Record</h4>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<style>
+    .watch-section-hr{
+  background:var(--bg);
+  padding:70px 8%;
+  color:var(--text);
+  font-family:Poppins;
+  }
+  .watch-play-hr{
+  text-decoration:none;
+  color:var(--text);
+  cursor:pointer;
+  }
+/* header */
+.watch-big-hr{
+position:relative;
+overflow:hidden;
+border-radius:6px;
+height:450px;
+}
+
+.watch-big-hr img{
+width:100%;
+height:100%;
+object-fit:cover;
+display:block;
+}
+.watch-card-hr{
+position:relative;
+}
+
+.watch-card-hr img{
+width:100%;
+height:170px;
+object-fit:cover;
+border-radius:5px;
+display:block;
+}.watch-small-grid-hr{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:20px;
+}
+.watch-header-hr{
+display:flex;
+align-items:center;
+gap:20px;
+margin-bottom:40px;
+}
+
+.watch-header-hr h2{
+font-size:28px;
+font-weight:600;
+}
+
+.watch-header-hr span{
+color:#9ca3af;
+font-size:14px;
+}
+
+.watch-more-hr{
+margin-left:auto;
+color:white;
+text-decoration:none;
+font-size:14px;
+}
+
+/* GRID */
+
+.watch-grid-hr{
+display:grid;
+grid-template-columns: 1.3fr 1fr;
+gap:30px;
+}
+
+/* BIG CARD */
+
+.watch-big-hr{
+position:relative;
+overflow:hidden;
+border-radius:6px;
+}
+
+.watch-big-hr img{
+width:100%;
+height:100%;
+object-fit:cover;
+display:block;
+}
+
+.watch-big-hr::after{
+content:"";
+position:absolute;
+inset:0;
+background:linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+}
+
+/* play */
+
+.watch-play-hr{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+width:60px;
+height:60px;
+border-radius:50%;
+border:2px solid white;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:18px;
+z-index:2;
+}
+
+.watch-play-hr.small{
+width:40px;
+height:40px;
+font-size:14px;
+}
+
+/* content */
+
+.watch-content-hr{
+position:absolute;
+bottom:30px;
+left:30px;
+z-index:2;
+}
+
+.watch-tag-hr{
+background:red;
+padding:4px 10px;
+font-size:12px;
+font-weight:600;
+}
+
+.watch-content-hr h3{
+margin-top:12px;
+font-size:26px;
+line-height:1.3;
+}
+
+.watch-content-hr p{
+font-size:12px;
+margin-top:10px;
+color:#cbd5e1;
+}
+
+/* SMALL GRID */
+
+.watch-small-grid-hr{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:20px;
+}
+
+.watch-card-hr{
+position:relative;
+}
+
+.watch-card-hr img{
+width:100%;
+height:160px;
+object-fit:cover;
+border-radius:5px;
+}
+
+.watch-card-hr span{
+display:block;
+margin-top:12px;
+font-size:11px;
+color:#9ca3af;
+}
+
+.watch-card-hr h4{
+font-size:15px;
+margin-top:6px;
+line-height:1.4;
+}
+
+/* responsive */
+
+@media(max-width:900px){
+
+.watch-grid-hr{
+grid-template-columns:1fr;
+}
+
+.watch-small-grid-hr{
+grid-template-columns:1fr 1fr;
+}
+
+}
+</style>
+
+<footer class="stackly-footer">
+
+<div class="stackly-footer-container">
+
+<!-- LOGO + COMPANY -->
+<div class="stackly-footer-col">
+
+<div class="stackly-logo">
+<img src="logo.webp" alt="Stackly Logo">
+</div>
+
+<h4>Company</h4>
+
+<ul>
+<li><a href="contact.html">contact</a></li>
+<li><a href="login.html">login</a></li>
+</ul>
+
+<p class="stackly-copy">
+© 2026 STAR. All Rights Reserved.
+</p>
+
+<div class="stackly-links">
+<a href="404.html">Terms Of Use</a>
+<a href="404.html">Privacy Policy</a>
+<a href="404.html">FAQ</a>
+</div>
+
+</div>
+
+
+<!-- LANGUAGE -->
+<div class="stackly-footer-col">
+
+<h4>View Website in</h4>
+
+<ul>
+<li class="stackly-lang">
+<i class="fa-solid fa-check"></i> English
+</li>
+</ul>
+
+</div>
+
+
+<!-- HELP -->
+<div class="stackly-footer-col">
+
+<h4>Need Help?</h4>
+
+<ul>
+<li><a href="404.html">Visit Help Center</a></li>
+<li><a href="404.html">Share Feedback</a></li>
+</ul>
+
+</div>
+
+
+<!-- SOCIAL -->
+<div class="stackly-footer-col">
+
+<h4>Connect with Us</h4>
+
+<div class="stackly-social">
+
+<a href="404.html"><i class="fa-brands fa-facebook-f"></i></a>
+<a href="404.html"><i class="fa-brands fa-x-twitter"></i></a>
+
+</div>
+
+<div class="stackly-apps">
+
+<img src="play.webp">
+<img src="app.webp">
+
+</div>
+
+</div>
+
+</div>
+
+</footer>
+<style>
+    .stackly-footer{
+background:#070b14;
+padding:70px 8%;
+color:#9ca3af;
+font-family:Poppins;
+}
+
+.stackly-footer-container{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:60px;
+}
+
+/* logo */
+
+.stackly-logo img{
+width:140px;
+margin-bottom:20px;
+}
+
+/* titles */
+
+.stackly-footer-col h4{
+color:white;
+margin-bottom:20px;
+font-size:18px;
+}
+
+/* list */
+
+.stackly-footer-col ul{
+list-style:none;
+padding:0;
+}
+
+.stackly-footer-col ul li{
+margin-bottom:12px;
+}
+
+.stackly-footer-col a{
+text-decoration:none;
+color:#9ca3af;
+transition:0.3s;
+}
+
+.stackly-footer-col a:hover{
+color:white;
+}
+
+/* copyright */
+
+.stackly-copy{
+margin-top:25px;
+font-size:14px;
+}
+
+.stackly-links{
+margin-top:10px;
+}
+
+.stackly-links a{
+margin-right:15px;
+font-size:14px;
+}
+
+/* language */
+
+.stackly-lang{
+color:#9ca3af;
+}
+
+.stackly-lang i{
+color:#4ade80;
+margin-right:6px;
+}
+
+/* social */
+
+.stackly-social{
+display:flex;
+gap:20px;
+font-size:22px;
+margin-bottom:25px;
+}
+
+.stackly-social a{
+color:white;
+}
+
+/* app buttons */
+
+.stackly-apps img{
+width:140px;
+margin-right:10px;
+margin-top:10px;
+}
+
+/* responsive */
+
+@media(max-width:900px){
+
+.stackly-footer-container{
+grid-template-columns:1fr 1fr;
+gap:40px;
+}
+
+}
+
+@media(max-width:600px){
+
+.stackly-footer-container{
+grid-template-columns:1fr;
+}
+
+}
+</style>

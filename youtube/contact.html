@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Stackly Header</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+:root{
+    --bg:#0d0d0d;
+    --text:#ffffff;
+    --muted:#e4e4e4;
+    --header-bg:rgba(0,0,0,0.65);
+    --card-bg:#111;
+    --accent1:#7c3aed;
+    --accent2:#ff3e7f;
+    --overlay:rgba(0,0,0,0.65);
+    --bg-image-overlay:rgba(0,0,0,0.65);
+    --contact-right-bg:rgba(20,20,20,0.8);
+}
+
+[data-theme="light"]{
+    --bg:#ffffff;
+    --text:#0b1220;
+    --muted:#6b7280;
+    --header-bg:rgba(255,255,255,0.7);
+    --card-bg:#f3f4f6;
+    --accent1:#6d28d9;
+    --accent2:#d9467a;
+    --overlay:rgba(0,0,0,0.2);
+    --bg-image-overlay:rgba(255,255,255,0.85);
+    --contact-right-bg:rgba(255,255,255,0.95);
+}
+
+html,body{transition:background-color .25s ease,color .25s ease}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Outfit',sans-serif;
+}
+
+body{
+background:var(--bg);
+color:var(--text);
+}
+
+/* HEADER */
+
+header{
+width:100%;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:20px 80px;
+background:var(--header-bg);
+backdrop-filter:blur(12px);
+position:sticky;
+top:0;
+z-index:1000;
+}
+
+/* LOGO */
+
+.logo{
+display:flex;
+align-items:center;
+gap:12px;
+font-size:34px;
+font-weight:600;
+color:var(--text);
+}
+
+.logo-icon{
+width:36px;
+height:36px;
+border-radius:10px;
+background:linear-gradient(45deg,var(--accent1),var(--accent2));
+display:flex;
+align-items:center;
+justify-content:center;
+color:white;
+}
+
+/* NAV */
+
+nav ul{
+display:flex;
+list-style:none;
+gap:40px;
+align-items:center;
+}
+
+nav ul li{
+position:relative;
+}
+
+nav ul li a{
+display:flex;
+align-items:center;
+gap:8px;
+text-decoration:none;
+color:var(--muted);
+font-size:16px;
+font-weight:500;
+cursor:pointer;
+}
+
+/* DROPDOWN */
+
+.dropdown{
+position:absolute;
+top:100%;
+left:0;
+background: var(--bg);
+padding:18px;
+border-radius:12px;
+display:none;
+flex-direction:column;
+gap:12px;
+min-width:170px;
+box-shadow:0 15px 50px rgba(0,0,0,0.5);
+border:1px solid rgba(255,255,255,0.08);
+backdrop-filter:none;
+}
+
+/* DESKTOP HOVER */
+
+@media(min-width:901px){
+
+nav ul li:hover > .dropdown{
+display:flex;
+}
+
+}
+
+/* MOBILE DROPDOWN */
+
+.dropdown.active{
+display:flex;
+}
+
+/* RIGHT SIDE */
+
+.right{
+display:flex;
+align-items:center;
+gap:30px;
+}
+
+.search{
+color:var(--text);
+font-size:18px;
+cursor:pointer;
+}
+
+.contact{
+background:linear-gradient(90deg,var(--accent1),var(--accent2));
+padding:12px 26px;
+border-radius:35px;
+color:white;
+font-size:15px;
+font-weight:600;
+display:flex;
+align-items:center;
+gap:10px;
+text-decoration:none;
+}
+
+.hamburger{
+display:none;
+font-size:24px;
+color:var(--text);
+cursor:pointer;
+}
+
+/* MOBILE FULL SCREEN MENU */
+
+.mobile-menu{
+position:fixed;
+top:0;
+left:-100%;
+width:100%;
+height:100vh;
+background:linear-gradient(160deg,#0b0b0b,#1a0033,#2a001d);
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+transition:.4s;
+z-index:2000;
+}
+
+.mobile-menu.active{
+left:0;
+}
+
+.mobile-menu ul{
+list-style:none;
+text-align:center;
+}
+
+.mobile-menu li{
+margin:20px 0;
+}
+
+.mobile-menu a{
+color:var(--text);
+font-size:26px;
+text-decoration:none;
+display:flex;
+align-items:center;
+gap:10px;
+justify-content:center;
+}
+
+.mobile-dropdown{
+display:none;
+margin-top:10px;
+}
+
+.mobile-dropdown a{
+display:block;
+font-size:18px;
+color:var(--muted);
+margin:8px 0;
+}
+
+.mobile-dropdown.active{
+display:block;
+}
+
+.close{
+position:absolute;
+top:30px;
+right:35px;
+font-size:30px;
+color:var(--text);
+cursor:pointer;
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+header{
+padding:20px 25px;
+}
+
+nav,
+.search,
+.contact{
+display:none;
+}
+
+.hamburger{
+display:block;
+}
+
+.logo{
+font-size:26px;
+}
+
+}
+.logo img{
+height: 60px;;
+width:auto;
+object-fit:contain;
+
+/* double shade effect */
+filter:
+drop-shadow(0 0 3px var(--accent1))
+drop-shadow(0 0 6px var(--accent2));
+
+transition:0.3s;
+}
+
+/* hover glow */
+.logo img:hover{
+filter:
+drop-shadow(0 0 6px var(--accent1))
+drop-shadow(0 0 12px var(--accent2));
+}
+</style>
+</head>
+<body>
+
+<header>
+
+<div class="logo">
+<img src="logo.webp" alt="Stackly Logo">
+</div>
+
+<nav id="navMenu">
+<ul>
+
+<li>
+<a onclick="toggleDropdown(this)">
+<i class="fa-solid fa-house"></i> HOME <i class="fa-solid fa-chevron-down"></i>
+</a>
+
+<div class="dropdown">
+<a href="home.html">Home 1</a>
+<a href="home2.html">Home 2</a>
+</div>
+
+</li>
+
+<li>
+<a href="movies.html"><i class="fa-solid fa-film"></i> MOVIES</a>
+</li>
+<li>
+<a href="about.html"><i class="fa-solid fa-heart"></i> ABOUT US</a>
+</li>
+<li>
+<a href="pages.html"><i class="fa-solid fa-file"></i> DASHBOARD </a>
+</li>
+
+<li>
+<a href="shop.html"><i class="fa-solid fa-bag-shopping"></i> SHOP</a>
+</li>
+
+<li>
+<a href="contact.html"><i class="fa-solid fa-newspaper"></i> CONTACT US</a>
+</li>
+
+</ul>
+</nav>
+
+<div class="right">
+
+<i class="fa-solid fa-magnifying-glass search"></i>
+
+<a href="login.html" class="contact">
+<i class="fa-solid fa-crown"></i>
+LOGIN NOW
+</a>
+
+<div class="hamburger" onclick="openMenu()">
+<i class="fa-solid fa-bars"></i>
+</div>
+
+</div>
+
+</header>
+
+<!-- MOBILE MENU -->
+
+<div class="mobile-menu" id="mobileMenu">
+
+<div class="close" onclick="closeMenu()">
+<i class="fa-solid fa-xmark"></i>
+</div>
+
+<ul>
+
+<li>
+
+<a onclick="toggleMobileDropdown()">
+<i class="fa-solid fa-house"></i> HOME
+</a>
+
+<div class="mobile-dropdown" id="mobileDrop">
+<a href="home.html">Home 1</a>
+<a href="home2.html">Home 2</a>
+</div>
+
+</li>
+
+<li><a href="movies.html"><i class="fa-solid fa-film"></i> MOVIES</a></li>
+<li><a href="about.html"><i class="fa-solid fa-heart"></i> ABOUT US</a></li>
+<li><a href="pages.html"><i class="fa-solid fa-file"></i> DASHBOARD</a></li>
+<li><a href="shop.html"><i class="fa-solid fa-bag-shopping"></i> SHOP</a></li>
+<li><a href="contact.html"><i class="fa-solid fa-bag-shopping"></i> CONTACT US</a></li>
+<li><a href="login.html"><i class="fa-solid fa-newspaper"></i> LOGIN</a></li>
+
+</ul>
+
+</div>
+
+<script>
+
+function toggleDropdown(element){
+
+if(window.innerWidth <= 900){
+
+let dropdown = element.nextElementSibling;
+dropdown.classList.toggle("active");
+
+}
+
+}
+
+function openMenu(){
+document.getElementById("mobileMenu").classList.add("active");
+}
+
+function closeMenu(){
+document.getElementById("mobileMenu").classList.remove("active");
+}
+
+function toggleMobileDropdown(){
+document.getElementById("mobileDrop").classList.toggle("active");
+}
+
+</script>
+
+<section class="stackly-movie-cta">
+
+<div class="stackly-cta-overlay"></div>
+
+<div class="stackly-cta-content">
+
+<h1>CONTACT SUPPORT</h1>
+
+<p>
+Need help or have questions about our streaming platform? 
+Reach out to our team anytime. We’re here to assist you with technical support, 
+account issues, or partnership inquiries.
+</p>
+
+<div class="stackly-cta-buttons">
+
+<a href="login.html" class="stackly-watch-btn">
+<i class="fa-solid fa-paper-plane"></i> Send Message
+</a>
+
+<a href="mailto:support@stackly.com" class="stackly-buy-btn">
+<i class="fa-solid fa-envelope"></i> Email Support
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+<style>
+    .stackly-movie-cta{
+background-image:url("h2.webp");
+}
+    .stackly-movie-cta{
+position:relative;
+height:500px;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+color:var(--text);
+font-family:Poppins;
+overflow:hidden;
+
+/* you will add your image here */
+background-size:cover;
+background-position:center;
+}
+
+/* dark / light overlay */
+
+.stackly-cta-overlay{
+position:absolute;
+inset:0;
+background:var(--bg-image-overlay);
+}
+
+/* content */
+
+.stackly-cta-content{
+position:relative;
+max-width:700px;
+padding:20px;
+}
+
+.stackly-cta-content h1{
+font-size:70px;
+font-weight:700;
+letter-spacing:3px;
+margin-bottom:20px;
+}
+
+.stackly-cta-content p{
+font-size:18px;
+color:var(--muted);
+margin-bottom:30px;
+}
+
+/* buttons */
+
+.stackly-cta-buttons{
+display:flex;
+justify-content:center;
+gap:20px;
+}
+
+.stackly-watch-btn{
+background:var(--card-bg);
+padding:14px 30px;
+border-radius:8px;
+text-decoration:none;
+color:var(--text);
+font-size:16px;
+transition:0.3s;
+}
+
+.stackly-buy-btn{
+background:linear-gradient(90deg,var(--accent1),var(--accent2));
+padding:14px 30px;
+border-radius:8px;
+text-decoration:none;
+color:white;
+font-size:16px;
+transition:0.3s;
+}
+
+.stackly-watch-btn:hover{
+background:rgba(255,255,255,0.04);
+}
+
+.stackly-buy-btn:hover{
+filter:brightness(.95);
+}
+</style>
+
+<!-- CONTACT SECTION -->
+
+<section class="contact-section">
+
+<div class="contact-container">
+
+<!-- LEFT SIDE -->
+
+<div class="contact-left">
+
+<h2>Contact Us</h2>
+
+<p>
+Have questions or feedback? Send us a message and we will get back to you soon.
+</p>
+
+<div class="contact-info">
+
+<div class="info-box">
+<i class="fa-solid fa-location-dot"></i>
+<span>Chennai, India</span>
+</div>
+
+<div class="info-box">
+<i class="fa-solid fa-envelope"></i>
+<span>support@stackly.com</span>
+</div>
+
+<div class="info-box">
+<i class="fa-solid fa-phone"></i>
+<span>+91 9876543210</span>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- RIGHT SIDE FORM -->
+
+<div class="contact-right">
+
+<form id="contactForm">
+
+<div class="input-box">
+<input type="text" required>
+<label>Full Name</label>
+</div>
+
+<div class="input-box">
+<input type="email" required>
+<label>Email Address</label>
+</div>
+
+<div class="input-box">
+<textarea required></textarea>
+<label>Your Message</label>
+</div>
+
+<button class="contact-btn" type="submit">
+Send Message
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<style>
+
+/* CONTACT SECTION */
+
+.contact-section{
+min-height:calc(100vh - 120px);
+display:flex;
+align-items:center;
+justify-content:center;
+padding:80px 20px;
+background:var(--bg);
+position:relative;
+overflow:hidden;
+}
+
+/* purple glow background */
+
+.contact-section::before{
+content:"";
+position:absolute;
+width:500px;
+height:500px;
+background:linear-gradient(45deg,var(--accent1),var(--accent2));
+filter:blur(160px);
+top:-150px;
+left:-150px;
+opacity:.5;
+}
+
+.contact-section::after{
+content:"";
+position:absolute;
+width:500px;
+height:500px;
+background:linear-gradient(45deg,var(--accent2),var(--accent1));
+filter:blur(160px);
+bottom:-150px;
+right:-150px;
+opacity:.5;
+}
+
+/* container */
+
+.contact-container{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:60px;
+max-width:1100px;
+width:100%;
+z-index:2;
+}
+
+/* LEFT SIDE */
+
+.contact-left h2{
+font-size:42px;
+margin-bottom:20px;
+}
+
+.contact-left p{
+color:var(--muted);
+margin-bottom:35px;
+line-height:1.6;
+}
+
+.contact-info{
+display:flex;
+flex-direction:column;
+gap:20px;
+}
+
+.info-box{
+display:flex;
+align-items:center;
+gap:14px;
+color:var(--muted);
+font-size:16px;
+}
+
+.info-box i{
+color:var(--accent2);
+font-size:18px;
+}
+
+/* RIGHT SIDE FORM */
+
+.contact-right{
+background:var(--contact-right-bg);
+padding:40px;
+border-radius:16px;
+border:1px solid rgba(0,0,0,0.06);
+backdrop-filter:blur(12px);
+}
+
+/* INPUT FIELDS */
+
+.input-box{
+position:relative;
+margin-bottom:25px;
+}
+
+.input-box input,
+.input-box textarea{
+width:100%;
+padding:14px;
+background:var(--card-bg);
+border:1px solid rgba(0,0,0,0.2);
+border-radius:8px;
+color:var(--text);
+outline:none;
+resize:none;
+}
+
+.input-box textarea{
+height:120px;
+}
+
+/* floating labels */
+
+.input-box label{
+position:absolute;
+top:14px;
+left:14px;
+color:var(--muted);
+font-size:14px;
+pointer-events:none;
+transition:.3s;
+}
+
+.input-box input:focus + label,
+.input-box textarea:focus + label,
+.input-box input:valid + label,
+.input-box textarea:valid + label{
+top:-8px;
+left:10px;
+font-size:12px;
+background:var(--bg);
+padding:0 6px;
+color:var(--accent2);
+}
+
+/* BUTTON */
+
+.contact-btn{
+width:100%;
+padding:14px;
+border:none;
+border-radius:30px;
+background:linear-gradient(90deg,var(--accent1),var(--accent2));
+color:white;
+font-weight:600;
+cursor:pointer;
+transition:.3s;
+}
+
+.contact-btn:hover{
+transform:scale(1.05);
+box-shadow:0 10px 30px rgba(255,0,150,0.15);
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+.contact-container{
+grid-template-columns:1fr;
+gap:40px;
+}
+
+.contact-left{
+text-align:center;
+}
+
+}
+
+</style>
+
+
+
+<script>
+
+/* redirect to 404 when form is valid */
+
+const form = document.getElementById("contactForm");
+
+form.addEventListener("submit", function(e){
+
+e.preventDefault();
+
+if(form.checkValidity()){
+window.location.href = "404.html";
+}
+
+});
+
+</script>
+
+<script>
+// Theme toggle: injects a button into the header and persists selection
+(function(){
+    const root = document.documentElement;
+    const stored = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const initial = stored || (prefersDark ? 'dark' : 'light');
+    root.setAttribute('data-theme', initial);
+
+    function updateIcon(btn){
+        if(!btn) return;
+        const icon = btn.querySelector('i');
+        if(root.getAttribute('data-theme') === 'dark') icon.className = 'fa-solid fa-moon';
+        else icon.className = 'fa-solid fa-sun';
+    }
+
+    function toggleTheme(){
+        const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+        updateIcon(document.getElementById('theme-toggle'));
+    }
+
+    // create button
+    const btn = document.createElement('button');
+    btn.id = 'theme-toggle';
+    btn.className = 'theme-toggle';
+    btn.setAttribute('aria-label','Toggle theme');
+    btn.style.background = 'transparent';
+    btn.style.border = 'none';
+    btn.style.color = 'var(--text)';
+    btn.style.fontSize = '18px';
+    btn.style.cursor = 'pointer';
+    btn.style.display = 'inline-flex';
+    btn.style.alignItems = 'center';
+    btn.style.gap = '8px';
+    const i = document.createElement('i');
+    i.className = initial === 'dark' ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
+    btn.appendChild(i);
+
+    const right = document.querySelector('.right');
+    if(right){
+        // insert before the hamburger so it stays in the right area
+        const hamburger = right.querySelector('.hamburger');
+        right.insertBefore(btn, hamburger || null);
+        btn.addEventListener('click', toggleTheme);
+    }
+
+    // react to system changes only if user hasn't chosen a theme
+    if(window.matchMedia){
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+            if(!localStorage.getItem('theme')){
+                const sys = e.matches ? 'dark' : 'light';
+                root.setAttribute('data-theme', sys);
+                updateIcon(document.getElementById('theme-toggle'));
+            }
+        });
+    }
+
+})();
+</script>
+
+<footer class="stackly-footer">
+
+<div class="stackly-footer-container">
+
+<!-- LOGO + COMPANY -->
+<div class="stackly-footer-col">
+
+<div class="stackly-logo">
+<img src="logo.webp" alt="Stackly Logo">
+</div>
+
+<h4>Company</h4>
+
+<ul>
+<li><a href="contact.html">contact</a></li>
+<li><a href="login.html">login</a></li>
+</ul>
+
+<p class="stackly-copy">
+© 2026 STAR. All Rights Reserved.
+</p>
+
+<div class="stackly-links">
+<a href="404.html">Terms Of Use</a>
+<a href="404.html">Privacy Policy</a>
+<a href="404.html">FAQ</a>
+</div>
+
+</div>
+
+
+<!-- LANGUAGE -->
+<div class="stackly-footer-col">
+
+<h4>View Website in</h4>
+
+<ul>
+<li class="stackly-lang">
+<i class="fa-solid fa-check"></i> English
+</li>
+</ul>
+
+</div>
+
+
+<!-- HELP -->
+<div class="stackly-footer-col">
+
+<h4>Need Help?</h4>
+
+<ul>
+<li><a href="404.html">Visit Help Center</a></li>
+<li><a href="404.html">Share Feedback</a></li>
+</ul>
+
+</div>
+
+
+<!-- SOCIAL -->
+<div class="stackly-footer-col">
+
+<h4>Connect with Us</h4>
+
+<div class="stackly-social">
+
+<a href="404.html"><i class="fa-brands fa-facebook-f"></i></a>
+<a href="404.html"><i class="fa-brands fa-x-twitter"></i></a>
+
+</div>
+
+<div class="stackly-apps">
+
+<img src="play.webp">
+<img src="app.webp">
+
+</div>
+
+</div>
+
+</div>
+
+</footer>
+<style>
+    .stackly-footer{
+background:#070b14;
+padding:70px 8%;
+color:#9ca3af;
+font-family:Poppins;
+}
+
+.stackly-footer-container{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:60px;
+}
+
+/* logo */
+
+.stackly-logo img{
+width:140px;
+margin-bottom:20px;
+}
+
+/* titles */
+
+.stackly-footer-col h4{
+color:white;
+margin-bottom:20px;
+font-size:18px;
+}
+
+/* list */
+
+.stackly-footer-col ul{
+list-style:none;
+padding:0;
+}
+
+.stackly-footer-col ul li{
+margin-bottom:12px;
+}
+
+.stackly-footer-col a{
+text-decoration:none;
+color:#9ca3af;
+transition:0.3s;
+}
+
+.stackly-footer-col a:hover{
+color:white;
+}
+
+/* copyright */
+
+.stackly-copy{
+margin-top:25px;
+font-size:14px;
+}
+
+.stackly-links{
+margin-top:10px;
+}
+
+.stackly-links a{
+margin-right:15px;
+font-size:14px;
+}
+
+/* language */
+
+.stackly-lang{
+color:#9ca3af;
+}
+
+.stackly-lang i{
+color:#4ade80;
+margin-right:6px;
+}
+
+/* social */
+
+.stackly-social{
+display:flex;
+gap:20px;
+font-size:22px;
+margin-bottom:25px;
+}
+
+.stackly-social a{
+color:white;
+}
+
+/* app buttons */
+
+.stackly-apps img{
+width:140px;
+margin-right:10px;
+margin-top:10px;
+}
+
+/* responsive */
+
+@media(max-width:900px){
+
+.stackly-footer-container{
+grid-template-columns:1fr 1fr;
+gap:40px;
+}
+
+}
+
+@media(max-width:600px){
+
+.stackly-footer-container{
+grid-template-columns:1fr;
+}
+
+}
+</style>

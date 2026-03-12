@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Stackly Header</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+/* ===== THEME VARIABLES ===== */
+
+:root{
+--bg-primary:#0d0d0d;
+--bg-input:#111;
+--text-primary:#fff;
+--text-muted:#aaa;
+--text-label:#777;
+--border:#333;
+--container-bg:rgba(20,20,20,0.8);
+}
+
+.light-theme{
+--bg-primary:#f5f5f5;
+--bg-input:#fff;
+--text-primary:#111;
+--text-muted:#555;
+--text-label:#666;
+--border:#ccc;
+--container-bg:#ffffff;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Outfit',sans-serif;
+}
+
+body{
+background:var(--bg-primary);
+color:var(--text-primary);
+transition:.3s;
+}
+
+/* HEADER */
+
+header{
+width:100%;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:20px 80px;
+background:rgba(0,0,0,0.65);
+backdrop-filter:blur(12px);
+position:sticky;
+top:0;
+z-index:1000;
+}
+
+/* LOGO */
+
+.logo img{
+height:60px;
+}
+
+/* NAV */
+
+nav ul{
+display:flex;
+list-style:none;
+gap:40px;
+align-items:center;
+}
+
+nav ul li{
+position:relative;
+}
+
+nav ul li a{
+display:flex;
+align-items:center;
+gap:8px;
+text-decoration:none;
+color:#e4e4e4;
+}
+
+/* DROPDOWN */
+
+.dropdown{
+position:absolute;
+top:100%;
+left:0;
+background:#111;
+padding:18px;
+border-radius:10px;
+display:none;
+flex-direction:column;
+gap:12px;
+min-width:160px;
+}
+
+@media(min-width:901px){
+nav ul li:hover > .dropdown{
+display:flex;
+}
+}
+
+.dropdown.active{
+display:flex;
+}
+
+/* RIGHT */
+
+.right{
+display:flex;
+align-items:center;
+gap:25px;
+}
+
+.search{
+font-size:18px;
+cursor:pointer;
+}
+
+.contact{
+background:linear-gradient(90deg,#7c3aed,#ff3e7f);
+padding:12px 26px;
+border-radius:35px;
+color:white;
+text-decoration:none;
+display:flex;
+align-items:center;
+gap:10px;
+}
+
+/* THEME BUTTON */
+
+/* THEME BUTTON CLEAN */
+
+.theme-toggle{
+display:flex;
+align-items:center;
+justify-content:center;
+cursor:pointer;
+font-size:18px;
+color:var(--text-primary);
+background:none;
+border:none;
+width:auto;
+height:auto;
+}
+
+.theme-toggle i{
+color:var(--text-primary);
+font-size:18px;
+transition:0.3s;
+}
+
+.theme-toggle:hover i{
+transform:scale(1.2);
+}
+
+.theme-toggle i{
+color:white;
+}
+
+/* HAMBURGER */
+
+.hamburger{
+display:none;
+font-size:24px;
+cursor:pointer;
+color:white;
+}
+
+/* MOBILE MENU */
+
+.mobile-menu{
+position:fixed;
+top:0;
+left:-100%;
+width:100%;
+height:100vh;
+background:linear-gradient(160deg,#0b0b0b,#1a0033,#2a001d);
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+transition:.4s;
+z-index:2000;
+}
+
+.mobile-menu.active{
+left:0;
+}
+
+.mobile-menu ul{
+list-style:none;
+text-align:center;
+}
+
+.mobile-menu li{
+margin:20px 0;
+}
+
+.mobile-menu a{
+color:white;
+font-size:26px;
+text-decoration:none;
+display:flex;
+align-items:center;
+gap:10px;
+justify-content:center;
+}
+
+.mobile-dropdown{
+display:none;
+margin-top:10px;
+}
+
+.mobile-dropdown a{
+display:block;
+font-size:18px;
+color:#ddd;
+margin:8px 0;
+}
+
+.mobile-dropdown.active{
+display:block;
+}
+
+.close{
+position:absolute;
+top:30px;
+right:35px;
+font-size:30px;
+cursor:pointer;
+color:white;
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+header{
+padding:20px 25px;
+}
+
+nav,
+.search,
+.contact{
+display:none;
+}
+
+.hamburger{
+display:block;
+}
+
+}
+
+/* AUTH SECTION */
+
+.auth-section{
+min-height:calc(100vh - 120px);
+display:flex;
+align-items:center;
+justify-content:center;
+padding:80px 20px;
+background:var(--bg-primary);
+}
+
+.auth-container{
+width:420px;
+background:var(--container-bg);
+padding:40px;
+border-radius:18px;
+border:1px solid var(--border);
+}
+
+/* SWITCH */
+
+.switch{
+display:flex;
+background:#111;
+border-radius:30px;
+overflow:hidden;
+margin-bottom:30px;
+}
+
+.switch button{
+flex:1;
+padding:12px;
+border:none;
+background:none;
+color:#aaa;
+cursor:pointer;
+}
+
+.switch button.active{
+background:linear-gradient(90deg,#7c3aed,#ff3e7f);
+color:white;
+}
+
+/* FORM */
+
+.form{
+display:none;
+}
+
+.form.active{
+display:block;
+}
+
+.input-box{
+position:relative;
+margin-bottom:20px;
+}
+
+.input-box input{
+width:100%;
+padding:14px;
+background:var(--bg-input);
+border:1px solid var(--border);
+border-radius:8px;
+color:var(--text-primary);
+}
+
+.input-box label{
+position:absolute;
+top:14px;
+left:14px;
+color:var(--text-label);
+font-size:14px;
+transition:.3s;
+}
+
+.input-box input:focus + label,
+.input-box input:valid + label{
+top:-8px;
+left:10px;
+font-size:12px;
+background:var(--bg-primary);
+padding:0 6px;
+color:#ff3e7f;
+}
+
+.auth-btn{
+width:100%;
+padding:14px;
+border:none;
+border-radius:30px;
+background:linear-gradient(90deg,#7c3aed,#ff3e7f);
+color:white;
+cursor:pointer;
+}
+
+.extra{
+text-align:center;
+margin-top:15px;
+color:var(--text-muted);
+}
+/* Forgot Password Text */
+
+.extra{
+text-align:center;
+margin-top:18px;
+font-size:14px;
+}
+
+.extra a{
+color:#ff3e7f;
+text-decoration:none;
+font-weight:500;
+position:relative;
+transition:0.3s;
+}
+
+/* underline animation */
+
+.extra a::after{
+content:"";
+position:absolute;
+left:0;
+bottom:-3px;
+width:0%;
+height:2px;
+background:linear-gradient(90deg,#7c3aed,#ff3e7f);
+transition:0.3s;
+}
+.right{
+display:flex;
+align-items:center;
+gap:25px;
+}
+
+/* keep icons centered */
+
+.theme-toggle{
+display:flex;
+align-items:center;
+justify-content:center;
+width:40px;
+height:40px;
+font-size:18px;
+cursor:pointer;
+}
+
+.search{
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:18px;
+}@media(max-width:900px){
+
+nav,
+.search,
+.contact{
+display:none;
+}
+
+.right{
+display:flex;
+align-items:center;
+gap:18px;
+}
+
+.theme-toggle{
+font-size:20px;
+}
+
+.hamburger{
+display:block;
+font-size:24px;
+}
+
+}
+.extra a:hover{
+color:#3413c9;
+}
+
+.extra a:hover::after{
+width:100%;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+<img src="logo.webp">
+</div>
+
+<nav>
+<ul>
+
+<li>
+<a onclick="toggleDropdown(this)">
+<i class="fa-solid fa-house"></i> HOME
+<i class="fa-solid fa-chevron-down"></i>
+</a>
+
+<div class="dropdown">
+<a href="home.html">Home 1</a>
+<a href="home2.html">Home 2</a>
+</div>
+
+</li>
+
+<li><a href="movies.html"><i class="fa-solid fa-film"></i> MOVIES</a></li>
+<li><a href="about.html"><i class="fa-solid fa-heart"></i> ABOUT US</a></li>
+<li><a href="pages.html"><i class="fa-solid fa-file"></i> DASHBOARD</a></li>
+<li><a href="shop.html"><i class="fa-solid fa-bag-shopping"></i> SHOP</a></li>
+<li><a href="contact.html"><i class="fa-solid fa-user"></i> CONTACT US</a></li>
+
+</ul>
+</nav>
+
+<div class="right">
+
+<div class="theme-toggle" onclick="toggleTheme()">
+<i class="fa-solid fa-moon" id="themeIcon"></i>
+</div>
+
+<i class="fa-solid fa-magnifying-glass search"></i>
+
+<a href="login.html" class="contact">
+<i class="fa-solid fa-crown"></i>
+LOGIN NOW
+</a>
+
+<div class="hamburger" onclick="openMenu()">
+<i class="fa-solid fa-bars"></i>
+</div>
+
+</div>
+
+</header>
+
+<!-- MOBILE MENU (UNCHANGED) -->
+
+<div class="mobile-menu" id="mobileMenu">
+
+<div class="close" onclick="closeMenu()">
+<i class="fa-solid fa-xmark"></i>
+</div>
+
+<ul>
+
+<li>
+<a onclick="toggleMobileDropdown()">
+<i class="fa-solid fa-house"></i> HOME
+</a>
+
+<div class="mobile-dropdown" id="mobileDrop">
+<a href="home.html">Home 1</a>
+<a href="home2.html">Home 2</a>
+</div>
+
+</li>
+
+<li><a href="movies.html"><i class="fa-solid fa-film"></i> MOVIES</a></li>
+<li><a href="about.html"><i class="fa-solid fa-heart"></i> ABOUT US</a></li>
+<li><a href="pages.html"><i class="fa-solid fa-file"></i> DASHBOARD</a></li>
+<li><a href="shop.html"><i class="fa-solid fa-bag-shopping"></i> SHOP</a></li>
+<li><a href="contact.html"><i class="fa-solid fa-newspaper"></i> CONTACT US</a></li>
+<li><a href="login.html"><i class="fa-solid fa-newspaper"></i> LOGIN</a></li>
+
+</ul>
+
+</div>
+
+<!-- LOGIN -->
+
+<section class="auth-section">
+
+<div class="auth-container">
+
+<div class="switch">
+<button id="loginBtn" class="active">Login</button>
+<button id="signupBtn">Signup</button>
+</div>
+
+<form class="form active" id="loginForm">
+
+<div class="input-box">
+<input type="email" required>
+<label>Email</label>
+</div>
+
+<div class="input-box">
+<input type="password" required minlength="4">
+<label>Password</label>
+</div>
+
+<button class="auth-btn" type="submit">Login</button>
+
+<p class="extra">
+<a href="404.html">Forgot password?</a>
+</p>
+
+</form>
+
+<form class="form" id="signupForm">
+
+<div class="input-box">
+<input type="text" required>
+<label>Full Name</label>
+</div>
+
+<div class="input-box">
+<input type="email" required>
+<label>Email</label>
+</div>
+
+<div class="input-box">
+<input type="password" required minlength="4">
+<label>Password</label>
+</div>
+
+<div class="input-box">
+<input type="password" required minlength="4">
+<label>Confirm Password</label>
+</div>
+
+<button class="auth-btn">Create Account</button>
+
+</form>
+
+</div>
+
+</section>
+
+<script>
+
+/* HEADER MOBILE DROPDOWN */
+
+function toggleDropdown(el){
+if(window.innerWidth <= 900){
+el.nextElementSibling.classList.toggle("active");
+}
+}
+
+function openMenu(){
+document.getElementById("mobileMenu").classList.add("active");
+}
+
+function closeMenu(){
+document.getElementById("mobileMenu").classList.remove("active");
+}
+
+function toggleMobileDropdown(){
+document.getElementById("mobileDrop").classList.toggle("active");
+}
+
+/* THEME */
+
+function toggleTheme(){
+
+const body=document.body;
+const icon=document.getElementById("themeIcon");
+
+body.classList.toggle("light-theme");
+
+if(body.classList.contains("light-theme")){
+icon.classList.replace("fa-moon","fa-sun");
+localStorage.setItem("theme","light");
+}else{
+icon.classList.replace("fa-sun","fa-moon");
+localStorage.setItem("theme","dark");
+}
+
+}
+
+/* LOAD THEME */
+
+window.onload=()=>{
+let savedTheme=localStorage.getItem("theme");
+
+if(savedTheme==="light"){
+document.body.classList.add("light-theme");
+document.getElementById("themeIcon").classList.replace("fa-moon","fa-sun");
+}
+}
+
+/* LOGIN SWITCH */
+
+const loginBtn=document.getElementById("loginBtn");
+const signupBtn=document.getElementById("signupBtn");
+
+const loginForm=document.getElementById("loginForm");
+const signupForm=document.getElementById("signupForm");
+
+loginBtn.onclick=()=>{
+loginForm.classList.add("active");
+signupForm.classList.remove("active");
+loginBtn.classList.add("active");
+signupBtn.classList.remove("active");
+}
+
+signupBtn.onclick=()=>{
+signupForm.classList.add("active");
+loginForm.classList.remove("active");
+signupBtn.classList.add("active");
+loginBtn.classList.remove("active");
+}
+
+/* LOGIN REDIRECT */
+
+loginForm.addEventListener("submit",function(e){
+
+e.preventDefault();
+
+if(loginForm.checkValidity()){
+window.location.href="404.html";
+}
+
+});
+
+</script>
+
+</body>
+</html>
