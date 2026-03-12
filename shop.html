@@ -304,6 +304,16 @@ filter:
 drop-shadow(0 0 6px #7c3aed)
 drop-shadow(0 0 12px #ff3e7f);
 }
+.right{
+display:flex;
+align-items:center;
+gap:25px;
+}
+@media(min-width:901px){
+.hamburger{
+display:none;
+}
+}
 </style>
 </head>
 <body>
@@ -352,20 +362,23 @@ drop-shadow(0 0 12px #ff3e7f);
 
 <div class="right">
 
+<!-- Theme Toggle -->
+<div class="theme-toggle" onclick="toggleTheme()">
+<i class="fa-solid fa-moon" id="themeIcon"></i>
+</div>
+
+<!-- Search -->
 <i class="fa-solid fa-magnifying-glass search"></i>
 
+<!-- Contact -->
 <a href="contact.html" class="contact">
 <i class="fa-solid fa-crown"></i>
 CONTACT NOW
 </a>
 
+<!-- Hamburger (mobile only) -->
 <div class="hamburger" onclick="openMenu()">
 <i class="fa-solid fa-bars"></i>
-</div>
-
-<!-- Theme Toggle Button -->
-<div class="theme-toggle" onclick="toggleTheme()">
-<i class="fa-solid fa-moon" id="themeIcon"></i>
 </div>
 
 </div>
@@ -374,26 +387,48 @@ CONTACT NOW
 
 <style>
 /* Theme Toggle Button Styles */
-.theme-toggle {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: var(--gradient-primary);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-    margin-left: 10px;
+/* Theme Toggle Clean Style */
+
+.theme-toggle{
+display:flex;
+align-items:center;
+justify-content:center;
+cursor:pointer;
+font-size:20px;
+color:var(--text-primary);
+background:none;
+border:none;
+margin-left:10px;
 }
 
-.theme-toggle:hover {
-    transform: scale(1.1);
+.theme-toggle:hover{
+transform:scale(1.15);
 }
 
-.theme-toggle i {
-    color: white;
-    font-size: 18px;
+.theme-toggle i{
+font-size:20px;
+}@media(max-width:900px){
+
+.right{
+display:flex;
+align-items:center;
+gap:18px;
+}
+
+.search,
+.contact{
+display:none;
+}
+
+.hamburger{
+display:block;
+font-size:22px;
+}
+
+.theme-toggle{
+font-size:22px;
+}
+
 }
 
 @media(max-width: 900px) {
@@ -917,8 +952,21 @@ font-family: "Poppins", sans-serif;
 body{
 background:var(--bg-primary);
 color:var(--text-primary);
-padding:30px;
+margin:0;
+padding:0;
+width:100%;
+overflow-x:hidden;
 transition: background 0.3s ease, color 0.3s ease;
+}.stackly-movie-cta{
+width:100%;
+min-height:100vh;
+background-size:cover;
+background-position:center;
+}section{
+width:100%;
+max-width:100%;
+margin:0;
+padding:60px 8%;
 }
 
 /* ===== SECTION ===== */

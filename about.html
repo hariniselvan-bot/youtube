@@ -346,7 +346,7 @@ drop-shadow(0 0 12px #ff3e7f);
 </li>
 
 <li>
-<a href="login.html"><i class="fa-solid fa-newspaper"></i> LOGIN</a>
+<a href="contact.html"><i class="fa-solid fa-newspaper"></i> CONTACT US</a>
 </li>
 
 </ul>
@@ -356,9 +356,9 @@ drop-shadow(0 0 12px #ff3e7f);
 
 <i class="fa-solid fa-magnifying-glass search"></i>
 
-<a href="contact.html" class="contact">
+<a href="login.html" class="contact">
 <i class="fa-solid fa-crown"></i>
-CONTACT NOW
+LOGIN NOW
 </a>
 
 <div class="hamburger" onclick="openMenu()">
@@ -447,6 +447,7 @@ CONTACT NOW
 <li><a href="about.html"><i class="fa-solid fa-heart"></i> ABOUT US</a></li>
 <li><a href="pages.html"><i class="fa-solid fa-file"></i> DASHBOARD</a></li>
 <li><a href="shop.html"><i class="fa-solid fa-bag-shopping"></i> SHOP</a></li>
+<li><a href="contact.html"><i class="fa-solid fa-newspaper"></i> CONTACT US</a></li>
 <li><a href="login.html"><i class="fa-solid fa-newspaper"></i> LOGIN</a></li>
 
 </ul>
@@ -2266,6 +2267,172 @@ gap:40px;
 
 .stackly-footer-container{
 grid-template-columns:1fr;
+}
+
+}
+/* ================= MOBILE RESPONSIVE ================= */
+
+/* Tablets */
+
+@media (max-width:1024px){
+
+header{
+padding:18px 40px;
+}
+
+.stackly-cta-content h1{
+font-size:50px;
+}
+
+.about-section,
+.approach-section,
+.history-section,
+.contact-section{
+gap:40px;
+}
+
+.team-container{
+grid-template-columns:repeat(2,1fr);
+}
+
+.process-container{
+grid-template-columns:repeat(2,1fr);
+}
+
+.stackly-footer-container{
+grid-template-columns:repeat(2,1fr);
+}
+
+}
+
+
+/* Mobile Phones */
+
+@media (max-width:768px){
+
+/* header */
+
+header{
+padding:15px 20px;
+}
+
+.logo img{
+height:45px;
+}
+
+/* hero section */
+
+.stackly-movie-cta{
+height:auto;
+padding:100px 20px;
+}
+
+.stackly-cta-content h1{
+font-size:36px;
+}
+
+.stackly-cta-content p{
+font-size:16px;
+}
+
+.stackly-cta-buttons{
+flex-direction:column;
+gap:15px;
+}
+
+/* about */
+
+.about-section{
+flex-direction:column;
+text-align:center;
+}
+
+.cards{
+flex-direction:column;
+}
+
+.counter-section{
+justify-content:center;
+gap:25px;
+}
+
+/* approach */
+
+.approach-section{
+flex-direction:column;
+}
+
+.img-small{
+position:relative;
+left:0;
+bottom:0;
+width:80%;
+margin-top:20px;
+}
+
+/* history */
+
+.history-section{
+flex-direction:column;
+}
+
+.history-right{
+grid-template-columns:1fr;
+}
+
+/* team */
+
+.team-container{
+grid-template-columns:1fr;
+}
+
+/* process */
+
+.process-container{
+grid-template-columns:1fr;
+}
+
+/* contact */
+
+.contact-section{
+flex-direction:column;
+}
+
+.input-row{
+flex-direction:column;
+}
+
+/* footer */
+
+.stackly-footer-container{
+grid-template-columns:1fr;
+gap:30px;
+}
+
+.stackly-apps img{
+width:120px;
+}
+
+}
+
+
+/* Small Phones */
+
+@media (max-width:480px){
+
+.stackly-cta-content h1{
+font-size:28px;
+}
+
+.text-block h1,
+.approach-content h1,
+.team-header h1,
+.process-header h1{
+font-size:28px;
+}
+
+.counter-box h2{
+font-size:30px;
 }
 
 }
