@@ -10,7 +10,27 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
 
+html,body{
+width:100%;
+overflow-x:hidden;
+font-family:'Outfit',sans-serif;
+}
+
+img{
+max-width:100%;
+height:auto;
+display:block;
+}
+
+section{
+width:100%;
+}
 :root{
     --bg:#0d0d0d;
     --text:#ffffff;
@@ -58,16 +78,17 @@ body{
 background:var(--bg);
 color:var(--text);
 transition:background-color 0.25s ease, color 0.25s ease;
+overflow-x:hidden;
 }
 
-/* HEADER */
 
+/* HEADER */
 header{
 width:100%;
 display:flex;
 align-items:center;
 justify-content:space-between;
-padding:20px 80px;
+padding:18px 8%;
 background:rgba(0,0,0,0.65);
 backdrop-filter:blur(12px);
 position:sticky;
@@ -75,6 +96,53 @@ top:0;
 z-index:1000;
 }
 
+/* LOGO */
+
+.logo{
+flex:1;
+display:flex;
+align-items:center;
+}
+
+.logo img{
+height:60px;
+}
+
+/* NAV */
+
+nav{
+flex:2;
+display:flex;
+justify-content:center;
+}
+
+nav ul{
+display:flex;
+list-style:none;
+gap:38px;
+align-items:center;
+}
+
+nav ul li a{
+display:flex;
+align-items:center;
+gap:8px;
+text-decoration:none;
+color:#e4e4e4;
+font-size:16px;
+font-weight:500;
+white-space:nowrap;
+}
+
+/* RIGHT SIDE */
+
+.right{
+flex:1;
+display:flex;
+align-items:center;
+justify-content:flex-end;
+gap:25px;
+}
 /* LOGO */
 
 .logo{
@@ -271,11 +339,13 @@ cursor:pointer;
 header{
 padding:20px 25px;
 }
-
 nav,
-.search,
 .contact{
 display:none;
+}
+
+.search{
+display:block;
 }
 
 .hamburger{
@@ -519,7 +589,7 @@ background-image:url("pos7.webp");
 }
     .stackly-movie-cta{
 position:relative;
-height:500px;
+min-height:500px;
 display:flex;
 align-items:center;
 justify-content:center;
@@ -549,13 +619,18 @@ max-width:700px;
 padding:20px;
 }
 
+@media(max-width:768px){
+
 .stackly-cta-content h1{
-font-size:70px;
-font-weight:700;
-letter-spacing:3px;
-margin-bottom:20px;
+font-size:32px;
+line-height:1.2;
 }
 
+.stackly-cta-content p{
+font-size:15px;
+}
+
+}
 .stackly-cta-content p{
 font-size:18px;
 color:var(--muted);
@@ -820,6 +895,274 @@ flex-direction:column;
 
 .counter-section{
 gap:30px;
+}
+
+}
+@media(max-width:768px){
+
+.about-section{
+flex-direction:column;
+gap:35px;
+padding:60px 20px;
+text-align:center;
+}
+
+/* image */
+
+.about-left img{
+border-radius:18px;
+}
+
+/* heading */
+
+.text-block h1{
+font-size:30px;
+line-height:1.3;
+}
+
+/* paragraph */
+
+.text-block p{
+max-width:100%;
+font-size:15px;
+}
+
+/* button */
+
+.contact-btn{
+margin-top:10px;
+}
+
+/* cards */
+
+.cards{
+flex-direction:column;
+gap:18px;
+margin-top:30px;
+}
+
+.card{
+min-width:100%;
+}
+
+/* counters */
+
+.counter-section{
+justify-content:center;
+gap:25px;
+margin-top:35px;
+}
+
+.counter-box h2{
+font-size:32px;
+}
+
+}
+.about-left img{
+width:100%;
+height:auto;
+object-fit:cover;
+}
+.counter-section{
+display:flex;
+flex-wrap:wrap;
+justify-content:flex-start;
+}
+.about-section{
+display:flex;
+gap:50px;
+padding:80px 8%;
+align-items:center;
+flex-wrap:wrap;
+background:var(--bg);
+color:var(--text);
+}
+
+/* LEFT IMAGE */
+
+.about-left{
+flex:1;
+overflow:hidden;
+}
+
+.about-left img{
+width:100%;
+border-radius:25px;
+object-fit:cover;
+}
+
+/* RIGHT CONTENT */
+
+.about-right{
+flex:1.2;
+}
+
+/* TEXT */
+
+.text-block h5{
+background:#1e293b;
+display:inline-block;
+padding:6px 14px;
+border-radius:20px;
+font-size:14px;
+margin-bottom:15px;
+}
+
+.text-block h1{
+font-size:42px;
+margin-bottom:20px;
+}
+
+.text-block h1 span{
+font-style:italic;
+color:var(--accent2);
+text-shadow:0 6px 18px rgba(0,0,0,0.45);
+}
+
+.text-block p{
+color:var(--muted);
+margin-bottom:20px;
+max-width:500px;
+}
+
+/* BUTTON */
+
+.contact-btn{
+padding:12px 28px;
+background:linear-gradient(90deg,var(--accent1),var(--accent2));
+color:var(--text);
+border:none;
+border-radius:30px;
+cursor:pointer;
+transition:0.3s;
+}
+
+.contact-btn:hover{
+transform:translateY(-3px);
+}
+
+/* CARDS */
+
+.cards{
+display:flex;
+gap:20px;
+margin-top:40px;
+flex-wrap:wrap;
+}
+
+.card{
+background:var(--card-bg);
+padding:20px;
+border-radius:20px;
+flex:1;
+min-width:220px;
+box-shadow:0 5px 20px rgba(0,0,0,0.4);
+text-align:left;
+}
+
+.card img{
+width:100%;
+border-radius:15px;
+margin-bottom:15px;
+}
+
+/* COUNTERS */
+
+.counter-section{
+display:flex;
+gap:60px;
+margin-top:50px;
+flex-wrap:wrap;
+}
+
+.counter-box h2{
+font-size:42px;
+font-weight:700;
+color:#ff3e7f;
+}
+
+.counter-box p{
+color:var(--muted);
+}
+
+/* REVEAL ANIMATION */
+
+.reveal-left{
+opacity:0;
+transform:translateX(-100px);
+transition:1s ease;
+}
+
+.reveal-right{
+opacity:0;
+transform:translateX(100px);
+transition:1s ease;
+}
+
+.active{
+opacity:1;
+transform:translateX(0);
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:768px){
+
+.about-section{
+flex-direction:column;
+gap:35px;
+padding:60px 20px;
+text-align:center;
+}
+
+/* IMAGE */
+
+.about-left img{
+border-radius:18px;
+}
+
+/* TEXT */
+
+.text-block h1{
+font-size:28px;
+line-height:1.3;
+}
+
+.text-block p{
+max-width:100%;
+font-size:15px;
+}
+
+/* BUTTON */
+
+.contact-btn{
+margin-top:10px;
+}
+
+/* CARDS */
+
+.cards{
+flex-direction:column;
+gap:18px;
+margin-top:30px;
+}
+
+.card{
+width:100%;
+text-align:center;
+}
+
+/* COUNTERS */
+
+.counter-section{
+justify-content:center;
+text-align:center;
+gap:25px;
+margin-top:35px;
+}
+
+.counter-box h2{
+font-size:30px;
 }
 
 }
@@ -2274,10 +2617,13 @@ grid-template-columns:1fr;
 
 /* Tablets */
 
-@media (max-width:1024px){
+@media(max-width:768px){
 
-header{
-padding:18px 40px;
+section{
+padding-left:20px !important;
+padding-right:20px !important;
+}
+
 }
 
 .stackly-cta-content h1{
@@ -2303,9 +2649,6 @@ grid-template-columns:repeat(2,1fr);
 grid-template-columns:repeat(2,1fr);
 }
 
-}
-
-
 /* Mobile Phones */
 
 @media (max-width:768px){
@@ -2321,7 +2664,9 @@ height:45px;
 }
 
 /* hero section */
-
+.stackly-movie-cta{
+width:100%;
+}
 .stackly-movie-cta{
 height:auto;
 padding:100px 20px;
@@ -2435,5 +2780,8 @@ font-size:28px;
 font-size:30px;
 }
 
+}
+*{
+max-width:100%;
 }
 </style>
